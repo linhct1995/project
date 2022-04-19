@@ -7,9 +7,9 @@
             <div class="form-group">
                 <label for="">Tên sản phẩm</label>
                 <input type="text" name="name" class="form-control" value="{{$products->name}}">
-                <!-- @error('room_no')
+                @error('name')
                 <div style="color: red;">{{ $message }}</div>
-                @enderror -->
+                @enderror
             </div>
         </div>
         <div class="col-6">
@@ -20,26 +20,38 @@
                 <label for="">Ảnh sản phẩm</label>
                 <input type="file" name="up_image" class="form-control">
             </div>
+            @error('up_image')
+            <div style="color: red;">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-4">
             <label for="">Giá</label>
             <input type="number" name="price" class="form-control" value="{{$products->price}}">
+            @error('price')
+            <div style="color: red;">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-4">
             <label for="">Sô lượng</label>
             <input type="number" name="amount" class="form-control" value="{{$products->amount}}">
+            @error('amount')
+            <div style="color: red;">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-4">
             <label for="">Trạng thái</label>
             <select name="status" id="status" class="form-control">
-                <option value="1" <?= $products->status == '1' ? 'selected' : '' ?> >Còn hàng</option>
-                <option value="2" <?= $products->status == '2' ? 'selected' : '' ?>>Hết hàng</option>              
+                <option value="1" <?= $products->status == '1' ? 'selected' : '' ?>>Còn hàng</option>
+                <option value="2" <?= $products->status == '2' ? 'selected' : '' ?>>Hết hàng</option>
             </select>
         </div>
         <div class="col-12">
             <div class="form-group">
                 <label for="">Chi tiết sản phẩm:</label>
                 <textarea name="description" class=form-control rows="10">{{$products->description}}</textarea>
+                @error('description')
+                <div style="color: red;">{{ $message }}</div>
+                @enderror
             </div>
         </div>
         <div class="text-right">

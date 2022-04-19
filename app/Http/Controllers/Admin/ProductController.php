@@ -3,19 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ValidatePrd;
 use App\Models\Cate;
 use App\Models\Products;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function create(){
-        $cate = Cate::all();
-        return view('admin.products.create_prd',compact('cate'));
-    }
-    public function saveAdd(Request $request)
+    public function create()
     {
-        
+        $cate = Cate::all();
+        return view('admin.products.create_prd', compact('cate'));
+    }
+    public function saveAdd(ValidatePrd $request)
+    {
+
         if ($request->hasFile('up_image')) {
             $path = $request->file('up_image')->storeAs('public/uploads/products',  $request->up_image->getClientOriginalName());
             $image = str_replace('public/', '', $path);
@@ -27,12 +29,13 @@ class ProductController extends Controller
             'description' => $request->description,
             'amount' => $request->amount,
             'cate_id' => $request->cate_id,
-            'image' =>$image,
+            'image' => $image,
         ]);
         $products->save();
         return redirect(route('list.prd'));
     }
-    public function list(Request $request){
+    public function list(Request $request)
+    {
         // $products = Products::all();
         $productQuery = Products::where('name', 'like', "%" . $request->keyword . "%");
         $products = $productQuery->paginate(3);
@@ -41,10 +44,10 @@ class ProductController extends Controller
         // }else{
         //     $products=Products::all();
         // }
-        
-        return view('admin.products.list_prd',compact('products'));
+
+        return view('admin.products.list_prd', compact('products'));
     }
-     public function delete($id)
+    public function delete($id)
     {
         $products = Products::find($id);
         $products->delete();
@@ -53,10 +56,27 @@ class ProductController extends Controller
     public function edit($id)
     {
         $products = Products::find($id);
-        return view('admin.products.edit_prd',compact('products'));
+        return view('admin.products.edit_prd', compact('products'));
     }
-    public function saveEdit($id,Request $request)
+    public function saveEdit($id, Request $request)
     {
+        $request->validate(
+            [
+                'name'=>'required|max:50',
+                'price'=>'required',
+                'amount'=>'required',
+                'description'=>'required',
+                'up_image'=>'mimes:jpg,bmp,png',
+            ],
+            [
+                'name.required'=>'Hãy nhập tên sản phẩm',
+                'name.max'=>'Tên sản tối đa 50 ký tự',
+                'price.required'=>'Hãy nhập giá sp',
+                'amount.required'=>'Hãy nhập số lượng sp',
+                'description.required'=>'Hãy nhập mô tả sản phẩm',
+                'up_image.mimes'=>'Ảnh chỉ nhận đuôi :jpg,bmp,png'
+            ]
+        );
         $products = Products::find($id);
         if ($request->hasFile('up_image')) {
             $path = $request->file('up_image')->storeAs('public/uploads/products',  $request->up_image->getClientOriginalName());

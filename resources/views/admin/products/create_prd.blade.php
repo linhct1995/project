@@ -7,9 +7,9 @@
             <div class="form-group">
                 <label for="">Tên sản phẩm</label>
                 <input type="text" name="name" class="form-control" value="{{old('name')}}">
-                <!-- @error('room_no')
+                @error('name')
                 <div style="color: red;">{{ $message }}</div>
-                @enderror -->
+                @enderror
             </div>
         </div>
         <div class="col-6">
@@ -19,6 +19,9 @@
                 <label for="">Ảnh sản phẩm</label>
                 <input type="file" name="up_image" class="form-control">
             </div>
+            @error('up_image')
+            <div style="color: red;">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-3">
             <label for="">Danh mục sản phẩm</label>
@@ -31,11 +34,17 @@
         </div>
         <div class="col-3">
             <label for="">Giá</label>
-            <input type="number" name="price" class="form-control" value="{{old('price')}}">
+            <input type="number" name="price" class="form-control" value="{{old('price')}}" min=1>
+            @error('price')
+            <div style="color: red;">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-3">
             <label for="">Sô lượng</label>
-            <input type="number" name="amount" class="form-control" value="{{old('amount')}}">
+            <input type="number" name="amount" class="form-control" value="{{old('amount')}}" min=1>
+            @error('amount')
+            <div style="color: red;">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-3">
             <label for="">Trạng thái</label>
@@ -47,7 +56,10 @@
         <div class="col-12">
             <div class="form-group">
                 <label for="">Chi tiết sản phẩm:</label>
-                <textarea name="description" class=form-control rows="10"></textarea>
+                <textarea name="description" class=form-control rows="10" ></textarea>
+                @error('description')
+                <div style="color: red;">{{ $message }}</div>
+                @enderror
             </div>
         </div>
         <div class="text-right">
