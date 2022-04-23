@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CateController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\FrontEnd\FrontController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +16,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return 'Hello World';
-});
+//FrontEnd
+Route::get('/', [FrontController::class,'index'])->name('front.index');
+//Admin
 Route::prefix('admin')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('admin.index');
     Route::prefix('product')->group(function () {
