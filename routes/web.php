@@ -37,4 +37,5 @@ Route::prefix('admin')->group(function () {
         Route::get('edit/{id}', [CateController::class, 'edit'])->name('edit.cate');
         Route::post('edit/{id}', [CateController::class, 'saveEdit']);
     });
+   
 });

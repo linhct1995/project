@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('front-theme/css/index.css')}}">
     <title>Document</title>
 </head>
@@ -23,6 +24,54 @@
                     <li class="nav_bar_li">Về chúng tôi</li>
                     <li class="nav_bar_li">Câu hỏi thường gặp</li>
                     <li class="nav_bar_li">Hotline: <span style="color: red;"> 1900 86 8667</span></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 text-right col-md-3">
+                <ul class="nav-right">
+                    <li class="cart-icon">
+                        <a  href="#"><i class="fas fa-cart-plus "></i></a>
+                        <div class="cart-hover">
+                            <div class="select-items">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="si-pic"><img src="{{ asset('front-theme/image/bo_sot_tieu.jpg')}}" alt="" height="70%" width="90%"></td>
+                                            <td class="si-text">
+                                                <div class="product-selected">
+                                                    <p>₫60.00 x 1</p>
+                                                    <h6>Kabino Bedside Table</h6>
+                                                </div>
+                                            </td>
+                                            <td class="si-close">
+                                                <i class="ti-close"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="si-pic"><img src="{{ asset('front-theme/image/bo_sot_tieu.jpg')}}" alt="" height="70%" width="90%"></td>
+                                            <td class="si-text">
+                                                <div class="product-selected">
+                                                    <p>₫60.00 x 1</p>
+                                                    <h6>Kabino Bedside Table</h6>
+                                                </div>
+                                            </td>
+                                            <td class="si-close">
+                                                <i class="ti-close"></i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="select-total">
+                                <span>total:</span>
+                                <h5>₫120.00</h5>
+                            </div>
+                            <div class="select-button">
+                                <div class="view-card"><a href="#" class="primary-btn ">VIEW CARD</a></div>
+                                <div class="checkout-btn"><a href="#" class="primary-btn ">CHECK OUT</a></div>
+                                
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </div>
             <div id="login">
@@ -83,46 +132,15 @@
         <div class="products">
             <div class="title_products">Sản phẩm</div>
             <div class="list_products">
+                @foreach($product as $prd)
                 <div class="product_image">
-                    <img src="{{ asset('front-theme/image/bo_sot_tieu.jpg')}}" alt="" height="70%" width="90%">
-                    <div class="name_product">Bò cuốn lá lốt</div>
-                    <div class="price_product" style="color: red;">150.000 đ</div>
+                    <img src="{{asset( 'storage/' . $prd->image)}}" alt="" height="70%" width="90%">
+                    <div class="add-cart"><a href="" id="abc">Add Cart</a></div>
+                    <div class="name_product">{{$prd->name}}</div>
+                    <div class="price_product" style="color: red;">{{number_format($prd->price)}}</div>
                 </div>
-                <div class="product_image">
-                    <img src="{{ asset('front-theme/image/bo_sot_tieu.jpg')}}" alt="" height="70%" width="90%">
-                    <div class="name_product">Bò cuốn lá lốt</div>
-                    <div class="price_product" style="color: red;">150.000 đ</div>
-                </div>
-                <div class="product_image">
-                    <img src="{{ asset('front-theme/image/bo_sot_tieu.jpg')}}" alt="" height="70%" width="90%">
-                    <div class="name_product">Bò cuốn lá lốt</div>
-                    <div class="price_product" style="color: red;">150.000 đ</div>
-                </div>
-                <div class="product_image">
-                    <img src="{{ asset('front-theme/image/bo_sot_tieu.jpg')}}" alt="" height="70%" width="90%">
-                    <div class="name_product">Bò cuốn lá lốt</div>
-                    <div class="price_product" style="color: red;">150.000 đ</div>
-                </div>
-                <div class="product_image">
-                    <img src="{{ asset('front-theme/image/bac-xiu-200ml_1.jpg')}}" alt="" height="70%" width="90%">
-                    <div class="name_product">Bò cuốn lá lốt</div>
-                    <div class="price_product" style="color: red;">150.000 đ</div>
-                </div>
-                <div class="product_image">
-                    <img src="{{ asset('front-theme/image/bac-xiu-200ml_1.jpg')}}" alt="" height="70%" width="90%">
-                    <div class="name_product">Bò cuốn lá lốt</div>
-                    <div class="price_product" style="color: red;">150.000 đ</div>
-                </div>
-                <div class="product_image">
-                    <img src="{{ asset('front-theme/image/bac-xiu-200ml_1.jpg')}}" alt="" height="70%" width="90%">
-                    <div class="name_product">Bò cuốn lá lốt</div>
-                    <div class="price_product" style="color: red;">150.000 đ</div>
-                </div>
-                <div class="product_image">
-                    <img src="{{ asset('front-theme/image/bo_sot_tieu.jpg')}}" alt="" height="70%" width="90%">
-                    <div class="name_product">Bò cuốn lá lốt</div>
-                    <div class="price_product" style="color: red;">150.000 đ</div>
-                </div>
+                @endforeach
+
             </div>
         </div>
         <div class="categories">
