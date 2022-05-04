@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CateController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\FrontEnd\CartController;
 use App\Http\Controllers\FrontEnd\FrontController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 //FrontEnd
 Route::get('/', [FrontController::class,'index'])->name('front.index');
+Route::get('/AddCart/{id}', [CartController::class,'AddCart'])->name('add.cart');
 //Admin
 Route::prefix('admin')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('admin.index');

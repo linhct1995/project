@@ -27,9 +27,9 @@
     <label for="">giá</label>
     <select name="keyprice" id="">
         <option value=""></option>
-        <option value="1" min="1" max="10">1-10</option>
-        <option value="2" min="11" max="20">10-20</option>
-        <option value="3" min="21" max="30">20-30</option>
+        <option value="10" >1-10</option>
+        <option value="20" >11-20</option>
+        <option value="30" >21-30</option>
     </select>
     <button type="submit">Tìm</button>
 </form>
