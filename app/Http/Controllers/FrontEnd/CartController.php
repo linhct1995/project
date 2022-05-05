@@ -23,6 +23,27 @@ class CartController extends Controller
             // dd($newCart);
             $req->session()->put('Cart',$newCart);
         }
-        return view('frontend.cart',compact('newCart'));
+        return view('frontend.cart');
+    }
+
+    public function DeleteItemCart(Request $req,$id)
+    {
+            
+            $oldCart = Session('Cart') ? Session('Cart') : null;
+            $newCart = new Cart($oldCart);
+            $newCart->DeleteItemCart($id);
+            if (count($newCart->products) > 0) {
+                $req->session()->put('Cart',$newCart);
+            }
+            else{
+                $req->session()->put('Cart');
+            }
+            // dd($newCart);
+           
+        return view('frontend.cart');
+    }
+    public function ListCart()
+    {
+        return view('frontend.list_cart');
     }
 }

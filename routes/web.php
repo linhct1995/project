@@ -19,7 +19,9 @@ use Illuminate\Support\Facades\Route;
 */
 //FrontEnd
 Route::get('/', [FrontController::class,'index'])->name('front.index');
+Route::get('/List-Cart', [CartController::class,'ListCart'])->name('list.cart');
 Route::get('/AddCart/{id}', [CartController::class,'AddCart'])->name('add.cart');
+Route::get('/DeleteItemCart/{id}', [CartController::class,'DeleteItemCart'])->name('delete.cart');
 //Admin
 Route::prefix('admin')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('admin.index');
