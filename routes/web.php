@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CartController as AdminCartController;
 use App\Http\Controllers\Admin\CateController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ProductController;
@@ -22,6 +23,10 @@ Route::get('/', [FrontController::class,'index'])->name('front.index');
 Route::get('/List-Cart', [CartController::class,'ListCart'])->name('list.cart');
 Route::get('/AddCart/{id}', [CartController::class,'AddCart'])->name('add.cart');
 Route::get('/DeleteItemCart/{id}', [CartController::class,'DeleteItemCart'])->name('delete.cart');
+Route::get('/Delete-List-ItemCart/{id}', [CartController::class,'DeleteListItemCart'])->name('delete.itemcart');
+Route::get('/Save-List-ItemCart/{id}/{quanty}', [CartController::class,'SaveListItemCart'])->name('save.itemcart');
+Route::get('/Check-Out', [CartController::class,'Checkout'])->name('checkout');
+Route::post('/Check-Out', [CartController::class,'SaveCheckout']);
 //Admin
 Route::prefix('admin')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('admin.index');
@@ -40,6 +45,11 @@ Route::prefix('admin')->group(function () {
         Route::get('delete/{id}', [CateController::class, 'delete'])->name('delete.cate');
         Route::get('edit/{id}', [CateController::class, 'edit'])->name('edit.cate');
         Route::post('edit/{id}', [CateController::class, 'saveEdit']);
+    });
+    Route::prefix('cart')->group(function () {
+        Route::get('list', [AdminCartController::class, 'list'])->name('admin.list.cart');
+        Route::get('order_detail/{id}', [AdminCartController::class, 'orderDetail'])->name('admin.order_detail');
+        
     });
    
 });

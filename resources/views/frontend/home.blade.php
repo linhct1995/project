@@ -13,14 +13,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
-<!-- CSS -->
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-<!-- Default theme -->
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
-<!-- Semantic UI theme -->
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
-<!-- Bootstrap theme -->
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+    <!-- Semantic UI theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
     <title>Document</title>
 </head>
 
@@ -43,40 +43,32 @@
                         <a href="#"><i class="fas fa-cart-plus "></i></a>
                         <div class="cart-hover">
                             <div id="chang-item-cart">
+                                @if(Session::has("Cart") != null)
                                 <div class="select-items">
                                     <table>
                                         <tbody>
+                                            @foreach(Session::get("Cart")->products as $item)
                                             <tr>
-                                                <td class="si-pic"><img src="{{ asset('front-theme/image/bo_sot_tieu.jpg')}}" alt="" height="70%" width="90%"></td>
+                                                <td class="si-pic"><img src="{{asset( 'storage/' . $item['productInfo']->image)}}" alt="" height="70%" width="90%"></td>
                                                 <td class="si-text">
                                                     <div class="product-selected">
-                                                        <p>₫60.00 x 1</p>
-                                                        <h6>Kabino Bedside Table</h6>
+                                                        <p>{{$item['productInfo']->price}} x {{$item['quanty']}}</p>
+                                                        <h6>{{$item['productInfo']->name}}</h6>
                                                     </div>
                                                 </td>
                                                 <td class="si-close">
-                                                    <i class="ti-close">X</i>
+                                                    <i class="ti-close" data-id="{{$item['productInfo']->id}}">X</i>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td class="si-pic"><img src="{{ asset('front-theme/image/bo_sot_tieu.jpg')}}" alt="" height="70%" width="90%"></td>
-                                                <td class="si-text">
-                                                    <div class="product-selected">
-                                                        <p>₫60.00 x 1</p>
-                                                        <h6>Kabino Bedside Table</h6>
-                                                    </div>
-                                                </td>
-                                                <td class="si-close">
-                                                    <i class="ti-close">X</i>
-                                                </td>
-                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="select-total">
                                     <span>total:</span>
-                                    <h5>₫120.00</h5>
+                                    <h5>{{Session::get("Cart")->totaPrice}}</h5>
                                 </div>
+                                @endif
                             </div>
                             <div class="select-button">
                                 <div class="view-card"><a href="#" class="primary-btn ">VIEW CARD</a></div>
@@ -233,12 +225,22 @@
                 url: 'AddCart/' + id,
                 type: 'GET'
             }).done(function(response) {
-                console.log(response);
                 $("#chang-item-cart").empty();
                 $("#chang-item-cart").html(response);
                 alertify.success('Thêm thành công');
             });
         }
+        $('#chang-item-cart').on("click", ".si-close i", function() {
+            $.ajax({
+                url: 'DeleteItemCart/' + $(this).data("id"),
+                type: 'GET'
+            }).done(function(response) {
+                $("#chang-item-cart").empty();
+                $("#chang-item-cart").html(response);
+                alertify.success('Xoá sản phẩm thành công');
+            });
+            // console.log($(this).data("id"));
+        });
     </script>
 </body>
 
