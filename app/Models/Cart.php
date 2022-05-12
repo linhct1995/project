@@ -12,4 +12,8 @@ class Cart extends Model
     public $fillable = [
         'name','phone','address','totalProduct','totalPrice'
     ];
+    // public function realtime()
+    // {
+    //     return $this->belongsToMany(self::class)
+    // }
 }

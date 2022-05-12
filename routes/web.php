@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CartController as AdminCartController;
 use App\Http\Controllers\Admin\CateController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\FrontEnd\CartController;
 use App\Http\Controllers\FrontEnd\FrontController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,10 @@ Route::get('/Delete-List-ItemCart/{id}', [CartController::class,'DeleteListItemC
 Route::get('/Save-List-ItemCart/{id}/{quanty}', [CartController::class,'SaveListItemCart'])->name('save.itemcart');
 Route::get('/Check-Out', [CartController::class,'Checkout'])->name('checkout');
 Route::post('/Check-Out', [CartController::class,'SaveCheckout']);
+Route::get('/registration', [UserController::class,'registration'])->name('registration');
+Route::post('/registration', [UserController::class,'saveRegistration']);
+Route::get('/Log-in', [UserController::class,'login'])->name('login');
+Route::post('/Log-in', [UserController::class,'saveLogin']);
 //Admin
 Route::prefix('admin')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('admin.index');

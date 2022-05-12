@@ -80,7 +80,7 @@
                 </ul>
             </div>
             <div id="login">
-                <a href="">Đăng nhập/Đăng ký</a>
+                <a href="{{route('login')}}">Đăng nhập/Đăng ký</a>
             </div>
         </header>
         <hr />
