@@ -19,18 +19,20 @@
     <link rel="stylesheet" href="{{ asset('template/css/jquery-ui.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{ asset('template/css/slicknav.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{ asset('template/css/style.css')}}" type="text/css">
+
 </head>
 
 <body>
     <form action="" method="POST">
         @csrf
+        @if(Auth::user() != null)
         <label for="">Tên</label>
-        <input type="text" name="name" placeholder=" Nhập Tên" >
+        <input type="text" name="name" placeholder=" Nhập Tên" value="{{Auth::user()->name }}">
         <label for="">SĐT</label>
-        <input type="text" name="phone" placeholder=" Nhập SĐT">
+        <input type="text" name="phone" placeholder=" Nhập SĐT" value="{{Auth::user()->phone }}">
         <label for="">Địa chỉ</label>
-        <input type="text" name="address" placeholder=" Nhập Địa chỉ">
-
+        <input type="text" name="address" placeholder=" Nhập Địa chỉ" value="{{Auth::user()->address }}" style="width: 400px;">
+        @endif
         <br>
         <div class="cart-table">
             <table>
@@ -75,7 +77,7 @@
                         <li class="cart-total">TotalPrice <span>$ {{Session::get("Cart")->totaPrice}}</span></li>
                     </ul>
                     <button>Thanh toán</button>
-                    
+
                     @endif
                 </div>
             </div>

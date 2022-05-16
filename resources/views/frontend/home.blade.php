@@ -25,6 +25,11 @@
 </head>
 
 <body>
+    <div>
+        @if(Auth::user() != null)
+        {{Auth::user()->name }}
+        @endif
+    </div>
     <div id="main">
         <header>
             <div id="logo">

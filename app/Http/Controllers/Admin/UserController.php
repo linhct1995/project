@@ -32,9 +32,15 @@ class UserController extends Controller
     public function saveLogin(Request $req)
     {
         $info = $req->only('email', 'password');
-        $info['type'] = 1   ;
+        // dd($info);
+        $info['type'] = 5;
+        // $user = User::all();
+      
         if (Auth::attempt($info)) {
+            // $user = Auth::user()->name;
+            // dd(Auth::user()->name);
             return redirect(route('front.index'));
         }
+        
     }
 }
