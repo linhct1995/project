@@ -32,6 +32,8 @@ Route::get('/registration', [UserController::class,'registration'])->name('regis
 Route::post('/registration', [UserController::class,'saveRegistration']);
 Route::get('/Log-in', [UserController::class,'login'])->name('login');
 Route::post('/Log-in', [UserController::class,'saveLogin']);
+Route::get('/Detail/{id}', [ProductController::class,'detail'])->name('detail.prd');
+Route::post('/Comment', [ProductController::class,'comment'])->name('comment.prd');
 //Admin
 Route::prefix('admin')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('admin.index');

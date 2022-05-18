@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidatePrd;
 use App\Models\Cate;
+use App\Models\Comment;
+use App\Models\Comment_Prd;
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -85,5 +88,24 @@ class ProductController extends Controller
         $products->fill($request->all());
         $products->save();
         return redirect(route('list.prd'));
+    }
+    public function detail($id)
+    {
+        $detail = Products::find($id);
+        return view('frontend.detail_prd',compact('detail'));
+    }
+    public function comment(Request $req)
+    {
+       $comment = Comment::create([
+          'customer_name' => $req->customer_name,
+          'content' => $req->comment,
+          'status' => '1'
+       ]);
+       Comment_Prd::create([
+           'id_comment'=>$comment->id,
+           'id_prd'=>$req->id_prd
+       ]);
+       $comment->save();
+    //    return redirect(route('detail.prd'));
     }
 }
