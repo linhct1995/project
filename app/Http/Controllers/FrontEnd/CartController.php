@@ -46,6 +46,7 @@ class CartController extends Controller
     }
     public function ListCart()
     {
+        
         return view('frontend.list_cart');
     }
     public function DeleteListItemCart(Request $req, $id)
@@ -75,6 +76,21 @@ class CartController extends Controller
     }
     public function Checkout()
     {
+        $cart  = Session::get("Cart")->products;
+        $cartNew = [];
+        foreach ($cart as $cartItem) {
+            if ($cartItem['quanty'] > $cartItem['productInfo']->amount) {
+                $cartItem["message"] = "thieu";            
+            }
+            $cartNew[] = $cartItem;            
+        }
+        
+        foreach($cartNew as $itemmm){
+            if (isset($itemmm['message']) ) {
+                return redirect(route('list.cart'))->with([ 'cartNew' => $cartNew ]);
+            }
+            
+        }
         return view('frontend.check_out');
     }
     public function SaveCheckout(Request $req)
@@ -88,9 +104,9 @@ class CartController extends Controller
             'phone' => $req->phone,
             'address' => $req->address,
             'totalProduct' => Session::get("Cart")->totalQuanty,
-            'totalPrice' => Session::get("Cart")->totaPrice,          
+            'totalPrice' => Session::get("Cart")->totaPrice,
         ]);
-        foreach(Session::get("Cart")->products as $item){
+        foreach (Session::get("Cart")->products as $item) {
             Order_Detail::create([
                 'order_id' => $order->id,
                 'name_prd' => $item['productInfo']->name,
@@ -98,7 +114,7 @@ class CartController extends Controller
                 'price' => $item['productInfo']->price,
                 'quantity' => $item['quanty'],
                 'totalPrice' => $item['price'],
-                
+
             ]);
         };
         $order->save();

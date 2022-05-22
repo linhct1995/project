@@ -18,6 +18,7 @@ class CreateComment extends Migration
             $table->string('customer_name');
             $table->string('content');
             $table->integer('status');
+            $table->integer('id_prd');
             $table->timestamps();
         });
     }
