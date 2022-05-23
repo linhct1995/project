@@ -11,7 +11,7 @@ class CartController extends Controller
 {
     public function list()
     {
-        $cart = Cart::paginate(2);
+        $cart = Cart::paginate(5);
         return view('admin.cart.list_cart',compact('cart'));
     }
     public function orderDetail($id)

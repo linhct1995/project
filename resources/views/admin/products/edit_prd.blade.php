@@ -38,13 +38,6 @@
             <div style="color: red;">{{ $message }}</div>
             @enderror
         </div>
-        <div class="col-4">
-            <label for="">Trạng thái</label>
-            <select name="status" id="status" class="form-control">
-                <option value="1" <?= $products->status == '1' ? 'selected' : '' ?>>Còn hàng</option>
-                <option value="2" <?= $products->status == '2' ? 'selected' : '' ?>>Hết hàng</option>
-            </select>
-        </div>
         <div class="col-12">
             <div class="form-group">
                 <label for="">Chi tiết sản phẩm:</label>

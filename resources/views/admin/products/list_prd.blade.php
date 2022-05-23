@@ -53,7 +53,7 @@
                         <div>Giá sản phẩm:{{$product->price}}</div>
                         <div>Số lượng:{{$product->amount}}</div>
                         <div>Trạng thái:
-                            <?php if ($product->status == '1') { ?>
+                            <?php if ($product->amount > 0) { ?>
                                 <span class="text-primary">Còn hàng</span>
                             <?php } else { ?>
                                 <span class="text-danger">Hết hàng</span>

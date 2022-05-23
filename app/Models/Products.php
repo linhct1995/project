@@ -10,7 +10,7 @@ class Products extends Model
     use HasFactory;
     protected $table = "products";
     public $fillable = [
-        'name', 'price', 'status', 'description','image','amount','cate_id'
+        'name', 'price','description','image','amount','cate_id'
     ];
     public function cate()
     {

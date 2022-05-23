@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CartController as AdminCartController;
 use App\Http\Controllers\Admin\CateController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
@@ -33,7 +34,7 @@ Route::post('/registration', [UserController::class,'saveRegistration']);
 Route::get('/Log-in', [UserController::class,'login'])->name('login');
 Route::post('/Log-in', [UserController::class,'saveLogin']);
 Route::get('/Detail/{id}', [ProductController::class,'detail'])->name('detail.prd');
-Route::post('/Comment', [ProductController::class,'comment'])->name('comment.prd');
+Route::post('/Comment', [CommentController::class,'comment'])->name('comment.prd');
 //Admin
 Route::prefix('admin')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('admin.index');
@@ -57,6 +58,10 @@ Route::prefix('admin')->group(function () {
         Route::get('list', [AdminCartController::class, 'list'])->name('admin.list.cart');
         Route::get('order_detail/{id}', [AdminCartController::class, 'orderDetail'])->name('admin.order_detail');
         
+    });
+    Route::prefix('comment')->group(function () {
+        Route::get('list', [CommentController::class, 'list'])->name('admin.list.comment');
+        Route::post('savecheckcomment/{id}', [CommentController::class, 'saveCheckComment'])->name('admin.savecheck.comment');       
     });
    
 });

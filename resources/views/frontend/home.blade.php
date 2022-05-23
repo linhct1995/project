@@ -140,12 +140,15 @@
             <div class="title_products">Sản phẩm</div>
             <div class="list_products">
                 @foreach($product as $prd)
+                @if(($prd -> amount ) > 0)
                 <div class="product_image">
                     <img src="{{asset( 'storage/' . $prd->image)}}" alt="" height="70%" width="90%">
-                    <div class="add-cart"><a onclick="AddCart({{$prd->id}})" >Add Cart</a></div>
+                    <div class="add-cart"><a onclick="AddCart({{$prd->id}})">Add Cart</a></div>
                     <div class="name_product"><a href="{{route('detail.prd',['id'=>$prd->id])}}">{{$prd->name}}</a></div>
                     <div class="price_product" style="color: red;">{{number_format($prd->price)}}</div>
+                    <div class="price_product" style="color: blue;">Số lượng : {{$prd->amount}}</div>
                 </div>
+                @endif
                 @endforeach
 
             </div>

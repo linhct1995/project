@@ -66,41 +66,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(Session::has("Cart") != null && !session()->get('cartNew')) 
+                                @if(Session::has("Cart") != null) 
                                 @foreach(Session::get("Cart")->products as $item)
                                 <tr>
                                     <td class="cart-pic first-row">
                                         <img src="{{asset( 'storage/' . $item['productInfo']->image)}}" alt="" height="70%" width="90%">
 
-                                    </td>
-                                    <td class="cart-title first-row">
-                                        <h5>{{$item['productInfo']->name}}</h5>
-                                    </td>
-                                    <td class="p-price first-row">{{$item['productInfo']->price}}</td>
-                                    <td class="qua-col first-row">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input id="quanty-item-{{$item['productInfo']->id}}" type="text" value="{{$item['quanty']}}">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="total-price first-row">{{$item['price']}}</td>
-                                    <td class="close-td first-row" onclick="DeleteItemCart({{$item['productInfo']->id}})"><i class="ti-close"></i></td>
-                                    <td class="close-td first-row"><i class=" ti-save" onclick="SaveItemCart({{$item['productInfo']->id}})"></i></td>
-                                </tr>
-                                @endforeach
-                                @endif
-                                @if( session()->get('cartNew') &&   count(session()->get('cartNew')) > 0)     
-                                @foreach(session()->get('cartNew') as $item)
-                                <tr>
-                                    <td class="cart-pic first-row">
-                                        <img src="{{asset( 'storage/' . $item['productInfo']->image)}}" alt="" height="70%" width="90%">
-                                        <span>
-                                            @if(isset($item['message']))
-                                             {{$item['message']}}
-                                            @endif
-                                           
-                                        </span>
                                     </td>
                                     <td class="cart-title first-row">
                                         <h5>{{$item['productInfo']->name}}</h5>

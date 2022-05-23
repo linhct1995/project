@@ -34,24 +34,17 @@
         </div>
         <div class="col-3">
             <label for="">Giá</label>
-            <input type="number" name="price" class="form-control" value="{{old('price')}}" min=1>
+            <input type="number" name="price" class="form-control" value="{{old('price')}}" min=0>
             @error('price')
             <div style="color: red;">{{ $message }}</div>
             @enderror
         </div>
         <div class="col-3">
             <label for="">Sô lượng</label>
-            <input type="number" name="amount" class="form-control" value="{{old('amount')}}" min=1>
+            <input type="number" name="amount" class="form-control" value="{{old('amount')}}" min=0>
             @error('amount')
             <div style="color: red;">{{ $message }}</div>
             @enderror
-        </div>
-        <div class="col-3">
-            <label for="">Trạng thái</label>
-            <select name="status" id="" class="form-control">
-                <option value="1">Còn hàng</option>
-                <option value="2">Hết hàng</option>
-            </select>
         </div>
         <div class="col-12">
             <div class="form-group">

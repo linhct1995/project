@@ -46,7 +46,7 @@ class CartController extends Controller
     }
     public function ListCart()
     {
-        
+
         return view('frontend.list_cart');
     }
     public function DeleteListItemCart(Request $req, $id)
@@ -76,29 +76,28 @@ class CartController extends Controller
     }
     public function Checkout()
     {
-        $cart  = Session::get("Cart")->products;
-        $cartNew = [];
-        foreach ($cart as $cartItem) {
-            if ($cartItem['quanty'] > $cartItem['productInfo']->amount) {
-                $cartItem["message"] = "thieu";            
-            }
-            $cartNew[] = $cartItem;            
-        }
-        
-        foreach($cartNew as $itemmm){
-            if (isset($itemmm['message']) ) {
-                return redirect(route('list.cart'))->with([ 'cartNew' => $cartNew ]);
-            }
-            
-        }
         return view('frontend.check_out');
     }
     public function SaveCheckout(Request $req)
     {
-        // foreach(Session::get("Cart")->products as $item){
-        //     dd($item['productInfo']->name);
-        // }
-        // dd(Session::get("Cart")->products);
+        $cart  = Session::get("Cart")->products;
+        $cartNew = [];
+        foreach ($cart as $cartItem) {
+            if ($cartItem['quanty'] > $cartItem['productInfo']->amount) {
+                $cartItem["message"] = "sản phẩm này không đủ";
+            }
+            $cartNew[] = $cartItem;
+        }
+        foreach ($cartNew as $item) {
+            if (isset($item['message'])) {
+                return redirect(route('checkout'))->with(['cartNew' => $cartNew]);
+            }
+            $amountold = Products::find($item['productInfo']->id);
+            $amountold->fill([
+                'amount' => $item['productInfo']->amount - $item['quanty']
+            ]);
+            $amountold->save();
+        }
         $order = ModelsCart::create([
             'name' => $req->name,
             'phone' => $req->phone,
@@ -118,5 +117,7 @@ class CartController extends Controller
             ]);
         };
         $order->save();
+        $req->session()->forget('Cart');
+        return redirect(route('front.index'));
     }
 }

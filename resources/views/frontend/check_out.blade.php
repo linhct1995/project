@@ -46,10 +46,35 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if(Session::has("Cart") != null)
+                    @if(Session::has("Cart") != null && !session()->get('cartNew'))
                     @foreach(Session::get("Cart")->products as $item)
                     <tr>
                         <td class="cart-pic first-row"><img src="{{asset( 'storage/' . $item['productInfo']->image)}}" alt="" height="70%" width="90%"></td>
+                        <td class="cart-title first-row">
+                            <h5>{{$item['productInfo']->name}}</h5>
+                        </td>
+                        <td class="p-price first-row">{{$item['productInfo']->price}}</td>
+                        <td class="qua-col first-row">
+                            <div class="quantity">
+                                <div class="pro-qty">
+                                    <input type="text" value="{{$item['quanty']}}" onkeydown="return false;">
+                                </div>
+                            </div>
+                        </td>
+                        <td class="total-price first-row">{{$item['price']}}</td>
+                    </tr>
+                    @endforeach
+                    @endif
+                    @if(session()->get('cartNew') && count(session()->get('cartNew')) > 0)
+                    @foreach(session()->get('cartNew') as $item)
+                    <tr>
+                        <td class="cart-pic first-row"><img src="{{asset( 'storage/' . $item['productInfo']->image)}}" alt="" height="70%" width="90%">
+                            <div>
+                                @if(isset($item['message']))
+                                {{$item['message']}}
+                                @endif
+                            </div>
+                        </td>
                         <td class="cart-title first-row">
                             <h5>{{$item['productInfo']->name}}</h5>
                         </td>
@@ -77,7 +102,6 @@
                         <li class="cart-total">TotalPrice <span>$ {{Session::get("Cart")->totaPrice}}</span></li>
                     </ul>
                     <button>Thanh toán</button>
-
                     @endif
                 </div>
             </div>
