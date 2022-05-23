@@ -83,7 +83,8 @@ class CartController extends Controller
         $cart  = Session::get("Cart")->products;
         $cartNew = [];
         foreach ($cart as $cartItem) {
-            if ($cartItem['quanty'] > $cartItem['productInfo']->amount) {
+            $id_Prd = Products::find($cartItem['productInfo']->id);
+            if ($cartItem['quanty'] > $id_Prd['amount']) {
                 $cartItem["message"] = "sản phẩm này không đủ";
             }
             $cartNew[] = $cartItem;
