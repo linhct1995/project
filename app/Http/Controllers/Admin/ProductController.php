@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidatePrd;
+use App\Models\Attribute;
+use App\Models\Attribute_Values;
 use App\Models\Cate;
 use App\Models\Comment;
+use App\Models\Product_ValueAtt;
 use App\Models\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,11 +19,19 @@ class ProductController extends Controller
     public function create()
     {
         $cate = Cate::all();
-        return view('admin.products.create_prd', compact('cate'));
+        $attribute = Attribute::all(); 
+        return view('admin.products.create_prd', compact('cate','attribute'));
     }
     public function saveAdd(ValidatePrd $request)
     {
-
+        // $value = [];
+        // foreach($request->attribute_values as $values){
+        //     $value[] = $values;
+        //    }
+        // foreach($value as $item){
+        //     $abc = Attribute_Values::where('id',$item)->get('values');
+        //     dd($abc);
+        // }
         if ($request->hasFile('up_image')) {
             $path = $request->file('up_image')->storeAs('public/uploads/products',  $request->up_image->getClientOriginalName());
             $image = str_replace('public/', '', $path);
@@ -28,12 +39,28 @@ class ProductController extends Controller
         $products = Products::create([
             'name' => $request->name,
             'price' => $request->price,
-            'description' => $request->description,
             'amount' => $request->amount,
             'cate_id' => $request->cate_id,
             'image' => $image,
         ]);
-        $products->save();
+        $value = [];
+        // foreach($request->attribute_values as $values){
+        //     $value[] = $values;
+        //     Product_ValueAtt::create([
+        //         'id_prd' => $products->id,
+        //         'id_values' =>  $values
+        //     ]);
+        //    }
+        foreach ($request->attribute_values as $values) {
+            $value[] = $values;
+            $linh = [];
+            foreach ($value as $item) {
+                    $abcd = Attribute_Values::where('id', $item)->get('values');
+                    $linh[] = $abcd;
+                }
+        } 
+        dd($linh['items']->values);
+        // $products->save();
         return redirect(route('list.prd'));
     }
     public function list(Request $request)
@@ -46,8 +73,8 @@ class ProductController extends Controller
         // }else{
         //     $products=Products::all();
         // }
-
-        return view('admin.products.list_prd', compact('products'));
+        $attValue = Attribute::all();
+        return view('admin.products.list_prd', compact('products','attValue'));
     }
     public function delete($id)
     {
