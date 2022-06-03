@@ -11,7 +11,8 @@ class CateController extends Controller
 {
     public function create()
     {
-        return view('admin.categories.create_cate');
+        $cate = Cate::all();
+        return view('admin.categories.create_cate' , compact('cate'));
     }
     public function saveCate(Request $request)
     {
@@ -28,11 +29,21 @@ class CateController extends Controller
                 'name.max' => 'Tên sản tối đa 50 ký tự',
             ]
         );
-        $cate = Cate::create([
-            'name' => $request->name
-        ]);
-        $cate->save();
-        return redirect(route('list.cate'));
+        if (isset(Cate::find($request->parent)->parent) == null ) {
+            $cate = Cate::create([
+                'name' => $request->name,
+                'parent' => 0
+            ]);
+            $cate->save();        
+        }else{
+            $parent = Cate::find($request->parent)->id;
+            $cate = Cate::create([
+                'name' => $request->name,
+                'parent' => $parent
+            ]);
+            $cate->save();
+        }
+        return redirect(route('create.cate'));
     }
     public function list()
     {

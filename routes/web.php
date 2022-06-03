@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\Attribute_ValueController;
+use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\Admin\BrandingController;
 use App\Http\Controllers\Admin\CartController as AdminCartController;
 use App\Http\Controllers\Admin\CateController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\Properties_PrdController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\FrontEnd\CartController;
 use App\Http\Controllers\FrontEnd\FrontController;
@@ -46,6 +50,22 @@ Route::prefix('admin')->group(function () {
         Route::get('edit/{id}', [ProductController::class, 'edit'])->name('edit.prd');
         Route::post('edit/{id}', [ProductController::class, 'saveEdit']);
     });
+    Route::prefix('attribute')->group(function () {
+        Route::get('create', [AttributeController::class, 'create'])->name('create.attribute');
+        Route::post('create', [AttributeController::class, 'saveAdd']);
+        // Route::get('list', [ProductController::class, 'list'])->name('list.prd');
+        // Route::get('delete/{id}', [ProductController::class, 'delete'])->name('delete.prd');
+        // Route::get('edit/{id}', [ProductController::class, 'edit'])->name('edit.prd');
+        // Route::post('edit/{id}', [ProductController::class, 'saveEdit']);
+    });
+    Route::prefix('attribute_values')->group(function () {
+        Route::get('create', [Attribute_ValueController::class, 'create'])->name('create.attribute_values');
+        Route::post('create', [Attribute_ValueController::class, 'saveAdd']);
+        // Route::get('list', [ProductController::class, 'list'])->name('list.prd');
+        // Route::get('delete/{id}', [ProductController::class, 'delete'])->name('delete.prd');
+        // Route::get('edit/{id}', [ProductController::class, 'edit'])->name('edit.prd');
+        // Route::post('edit/{id}', [ProductController::class, 'saveEdit']);
+    });
     Route::prefix('cate')->group(function () {
         Route::get('create', [CateController::class, 'create'])->name('create.cate');
         Route::post('create', [CateController::class, 'saveCate']);
@@ -53,6 +73,14 @@ Route::prefix('admin')->group(function () {
         Route::get('delete/{id}', [CateController::class, 'delete'])->name('delete.cate');
         Route::get('edit/{id}', [CateController::class, 'edit'])->name('edit.cate');
         Route::post('edit/{id}', [CateController::class, 'saveEdit']);
+    });
+    Route::prefix('brand')->group(function () {
+        Route::get('create', [BrandingController::class, 'create'])->name('create.brand');
+        Route::post('create', [BrandingController::class, 'saveBrand']);
+        // Route::get('list', [CateController::class, 'list'])->name('list.cate');
+        // Route::get('delete/{id}', [CateController::class, 'delete'])->name('delete.cate');
+        // Route::get('edit/{id}', [CateController::class, 'edit'])->name('edit.cate');
+        // Route::post('edit/{id}', [CateController::class, 'saveEdit']);
     });
     Route::prefix('cart')->group(function () {
         Route::get('list', [AdminCartController::class, 'list'])->name('admin.list.cart');

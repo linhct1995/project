@@ -1,50 +1,30 @@
 @extends('admin.layouts.main')
 @section('content')
-<style>
-    .flex-container {
-        display: flex;
-    }
-
-    .flex-container>.detail {
-        width: max-content;
-    }
-
-    form>button {
-        border-radius: 5px;
-    }
-
-    form>select {
-        margin: 0px 10px 0px 10px;
-        height: 30px;
-    }
-    .cate{
-        width: 150px;
-    }
-</style>
 <form action="" method="get">
     <label for="">Tìm kiếm</label>
     <input type="text" name="keyword" placeholder="tìm tên sản phẩm">
     <label for="">giá</label>
     <select name="keyprice" id="">
         <option value=""></option>
-        <option value="10" >1-10</option>
-        <option value="20" >11-20</option>
-        <option value="30" >21-30</option>
+        <option value="10">1-10</option>
+        <option value="20">11-20</option>
+        <option value="30">21-30</option>
     </select>
     <button type="submit">Tìm</button>
 </form>
 <table class="table">
     <thead>
-        <tr>        
+        <tr>
             <th scope="col">Sản phẩm</th>
-            <th scope="col" class="cate">Danh mục </th>
-            <th scope="col">Mô tả</th>
+            <th scope="col" class="cate">Thể loại</th>
+            <th scope="col" >Thương hiệu</th>
+            <th scope="col">Thông số kỹ thuật</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
         @foreach($products as $product)
-        <tr>          
+        <tr>
             <td>
                 <div class="flex-container">
                     <div><img src="{{asset( 'storage/' . $product->image)}}" width="100" /></div>
@@ -63,7 +43,19 @@
                 </div>
             </td>
             <td class="flex-container">{{$product->cate->name}}</td>
-            <td>{{$product->description}}</td>
+            <td class="flex-container">{{$product->brand->name}}</td>
+            <td>
+                <table class="table">
+                    <tbody>
+                        @foreach($product->PrdAttValue as $items)
+                        <tr>
+                            <td>{{$items->attribute}}</td>
+                            <td>{{$items->values}}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </td>
             <td>
                 <a href="{{route('edit.prd', ['id' => $product->id])}}" class="btn btn-info">Sửa</a>
                 <a href="{{route('delete.prd', ['id' => $product->id])}}" class="btn btn-danger" onclick="return confirm('Bạn có muốn xoá sản phẩm không');">Xóa</a>

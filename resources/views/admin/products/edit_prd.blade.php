@@ -38,15 +38,6 @@
             <div style="color: red;">{{ $message }}</div>
             @enderror
         </div>
-        <div class="col-12">
-            <div class="form-group">
-                <label for="">Chi tiết sản phẩm:</label>
-                <textarea name="description" class=form-control rows="10">{{$products->description}}</textarea>
-                @error('description')
-                <div style="color: red;">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
         <div class="text-right">
             <button type="submit" class="btn btn-primary">Lưu</button>
             <a href="" class="btn btn-danger">Hủy</a>

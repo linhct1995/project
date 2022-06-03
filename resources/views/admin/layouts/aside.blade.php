@@ -70,6 +70,35 @@
           <a href="#" class="nav-link active">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
+              Thuộc tính sản phẩm
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="" class="nav-link active">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Danh sách thuộc tính sản phẩm</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('create.attribute')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Thêm mới thuộc tính sản phẩm</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('create.attribute_values')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Thêm mới dữ liệu thuộc tính sản phẩm</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item menu-open">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
               Danh mục sản phẩm
               <i class="right fas fa-angle-left"></i>
             </p>
@@ -85,6 +114,29 @@
               <a href="{{route('create.cate')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Thêm mới danh mục sản phẩm</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item menu-open">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Thương hiệu sản phẩm
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{route('list.cate')}}" class="nav-link active">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Danh sách thương hiệu </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('create.brand')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Thêm mới thương hiệu sản phẩm</p>
               </a>
             </li>
           </ul>

@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cate extends Model
+class Product_ValueAtt extends Model
 {
     use HasFactory;
-    protected $table = "categories";
+    protected $table = "product_attribute_values";
     public $fillable = [
-        'name','parent'
+        'values','id_prd','attribute'
     ];
 }

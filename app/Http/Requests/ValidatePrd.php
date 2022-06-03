@@ -33,7 +33,6 @@ class ValidatePrd extends FormRequest
             ],
             'price'=>'required',
             'amount'=>'required',
-            'description'=>'required',
             'up_image'=>'required|mimes:jpg,bmp,png',
 
         ];
@@ -46,7 +45,6 @@ class ValidatePrd extends FormRequest
             'name.max'=>'Tên sản tối đa 50 ký tự',
             'price.required'=>'Hãy nhập giá sp',
             'amount.required'=>'Hãy nhập số lượng sp',
-            'description.required'=>'Hãy nhập mô tả sản phẩm',
             'up_image.mimes'=>'Ảnh chỉ nhận đuôi :jpg,bmp,png',
             'up_image.required'=>'Hãy nhập ảnh sản phẩm',
         ];

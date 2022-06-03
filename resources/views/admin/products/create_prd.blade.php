@@ -33,6 +33,16 @@
             </select>
         </div>
         <div class="col-3">
+            <label for="">Thương hiệu </label>
+            <select name="brand_id" id="" class="form-control">
+                <option value="0">Chọn thương hiệu</option>
+                @foreach($brands as $brand){
+                <option value="{{$brand->id}}">{{$brand->name}}</option>
+                }
+                @endforeach
+            </select>
+        </div>
+        <div class="col-3">
             <label for="">Giá</label>
             <input type="number" name="price" class="form-control" value="{{old('price')}}" min=0>
             @error('price')
@@ -46,15 +56,18 @@
             <div style="color: red;">{{ $message }}</div>
             @enderror
         </div>
-        <div class="col-12">
-            <div class="form-group">
-                <label for="">Chi tiết sản phẩm:</label>
-                <textarea name="description" class=form-control rows="10" ></textarea>
-                @error('description')
-                <div style="color: red;">{{ $message }}</div>
-                @enderror
-            </div>
+        @foreach($attribute as $item)
+        <div class="col-3">
+            <label for="" >{{$item -> name}}</label> 
+            <input type="hidden" name="attribute[]" value="{{$item->name}}">    
+            <select name="attribute_values[]" id="">
+                <option value="">Chọn</option>
+                @foreach($item->attValue as $items)
+                <option value="{{$items -> id}}"> {{$items -> values}} </option>
+                @endforeach
+            </select>        
         </div>
+        @endforeach
         <div class="text-right">
             <button type="submit" class="btn btn-primary">Lưu</button>
             <a href="" class="btn btn-danger">Hủy</a>

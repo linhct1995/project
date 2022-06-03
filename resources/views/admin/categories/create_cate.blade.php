@@ -8,7 +8,13 @@
         @error('name')
         <div style="color: red;">{{ $message }}</div>
         @enderror
-
+        <label for="">Danh mục cha</label>
+        <select name="parent" id="">
+            <option value="">Chọn</option>
+            @foreach($cate as $key => $cate)
+            <option value="{{$cate->id}}">{{$cate->name}}</option>
+            @endforeach
+        </select>
         <button type="submit" class="btn btn-primary">Lưu</button>
         <a href="" class="btn btn-danger">Hủy</a>
 
