@@ -14,10 +14,11 @@ class CreateProductAttributeValues extends Migration
     public function up()
     {
         Schema::create('product_attribute_values', function (Blueprint $table) {
-            $table->id();
-            $table->integer('id_prd');
-            $table->integer('id_values');
-            $table->timestamps();
+            $table->unsignedBigInteger('id_prd'); 
+            $table->unsignedBigInteger('attribute_id');
+            $table->string('values') ;
+            $table->foreign('id_prd')->references('id')->on('products')->onUpdate('cascade');
+            $table->foreign('attribute_id')->references('id')->on('attribute') ;
         });
     }
 

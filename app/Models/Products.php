@@ -24,4 +24,10 @@ class Products extends Model
     {
         return $this->hasMany(Product_ValueAtt::class,'id_prd','id');
     }
+    public function Attribute(){
+        return $this->belongsToMany(Attribute::class,'product_attribute_values','id_prd', 'attribute_id');
+    }
+    public function AttribueValue(){
+        return $this->belongsToMany(Attribute_Values::class,'product_attribute_values','id_prd', 'values_id');
+    }
 }

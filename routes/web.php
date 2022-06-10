@@ -53,10 +53,10 @@ Route::prefix('admin')->group(function () {
     Route::prefix('attribute')->group(function () {
         Route::get('create', [AttributeController::class, 'create'])->name('create.attribute');
         Route::post('create', [AttributeController::class, 'saveAdd']);
-        // Route::get('list', [ProductController::class, 'list'])->name('list.prd');
-        // Route::get('delete/{id}', [ProductController::class, 'delete'])->name('delete.prd');
-        // Route::get('edit/{id}', [ProductController::class, 'edit'])->name('edit.prd');
-        // Route::post('edit/{id}', [ProductController::class, 'saveEdit']);
+        Route::get('list', [AttributeController::class, 'list'])->name('list.attribute');
+        Route::get('delete/{id}', [AttributeController::class, 'delete'])->name('delete.attribute');
+        Route::get('edit/{id}', [AttributeController::class, 'edit'])->name('edit.attribute');
+        Route::post('edit/{id}', [AttributeController::class, 'saveEdit']);
     });
     Route::prefix('attribute_values')->group(function () {
         Route::get('create', [Attribute_ValueController::class, 'create'])->name('create.attribute_values');

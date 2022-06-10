@@ -10,6 +10,7 @@ class Product_ValueAtt extends Model
     use HasFactory;
     protected $table = "product_attribute_values";
     public $fillable = [
-        'values','id_prd','attribute'
+        'values_id','id_prd','attribute_id'
     ];
+    
 }

@@ -1,5 +1,11 @@
 @extends('admin.layouts.main')
 @section('content')
+<?php
+
+use Illuminate\Support\Facades\DB;
+
+
+?>
 <form action="" method="get">
     <label for="">Tìm kiếm</label>
     <input type="text" name="keyword" placeholder="tìm tên sản phẩm">
@@ -17,8 +23,9 @@
         <tr>
             <th scope="col">Sản phẩm</th>
             <th scope="col" class="cate">Thể loại</th>
-            <th scope="col" >Thương hiệu</th>
+            <th scope="col">Thương hiệu</th>
             <th scope="col">Thông số kỹ thuật</th>
+            <th scope="col"></th>
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -47,12 +54,23 @@
             <td>
                 <table class="table">
                     <tbody>
-                        @foreach($product->PrdAttValue as $items)
+                        @foreach($product->Attribute as $items)
                         <tr>
-                            <td>{{$items->attribute}}</td>
-                            <td>{{$items->values}}</td>
+                            <td style="font-weight: bold;">{{$items->name}}</td>                           
                         </tr>
                         @endforeach
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                <table class="table">
+                    <tbody>
+                        @foreach($product->AttribueValue as $items)
+                        <tr>
+                            <td>{{$items->values}}</td>   
+                        </tr>
+                        @endforeach
+
                     </tbody>
                 </table>
             </td>

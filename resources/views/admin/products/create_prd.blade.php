@@ -26,6 +26,7 @@
         <div class="col-3">
             <label for="">Danh mục sản phẩm</label>
             <select name="cate_id" id="" class="form-control">
+            <option value="">Chọn danh mục sản phẩm</option>
                 @foreach($cate as $cate){
                 <option value="{{$cate->id}}">{{$cate->name}}</option>
                 }
@@ -35,7 +36,7 @@
         <div class="col-3">
             <label for="">Thương hiệu </label>
             <select name="brand_id" id="" class="form-control">
-                <option value="0">Chọn thương hiệu</option>
+                <option value="">Chọn thương hiệu</option>
                 @foreach($brands as $brand){
                 <option value="{{$brand->id}}">{{$brand->name}}</option>
                 }
@@ -59,7 +60,7 @@
         @foreach($attribute as $item)
         <div class="col-3">
             <label for="" >{{$item -> name}}</label> 
-            <input type="hidden" name="attribute[]" value="{{$item->name}}">    
+            <input type="hidden" name="attribute_id[]" value="{{$item->id}}">    
             <select name="attribute_values[]" id="">
                 <option value="">Chọn</option>
                 @foreach($item->attValue as $items)

@@ -39,15 +39,13 @@ class ProductController extends Controller
             'brand_id' => $request->brand_id
         ]);
         foreach ($request->attribute_values as $key => $values) {
-            $values = Attribute_Values::find($values)->values;
+            // $values = Attribute_Values::find($values)->values;
             Product_ValueAtt::create([
                 'id_prd' => $products->id,
-                'values' =>   $values,
-                'attribute' => $request->attribute[$key]
+                'values_id' =>   $values,
+                'attribute_id' => $request->attribute_id[$key]
             ]);
         }
-
-        $products->save();
         return redirect(route('list.prd'));
     }
     public function list(Request $request)
@@ -71,7 +69,16 @@ class ProductController extends Controller
     public function edit($id)
     {
         $products = Products::find($id);
-        return view('admin.products.edit_prd', compact('products'));
+        $cate = Cate::all();
+        $brand = Branding::all();
+        $attribute = Attribute::all();
+        $prd_att = DB::table('product_attribute_values')->where('id_prd', $id)->pluck('values_id')->toArray();
+        // dd($prd_att);
+        /* 
+        so sánh value_id ở bảng prd_att_vale 
+        có trùng  vs id ở bảng att_value hay ko : đã lấy  xong 
+        */
+        return view('admin.products.edit_prd', compact('products', 'cate', 'brand', 'attribute','prd_att'));
     }
     public function saveEdit($id, Request $request)
     {
@@ -80,7 +87,6 @@ class ProductController extends Controller
                 'name' => 'required|max:50',
                 'price' => 'required',
                 'amount' => 'required',
-                'description' => 'required',
                 'up_image' => 'mimes:jpg,bmp,png',
             ],
             [
@@ -88,7 +94,6 @@ class ProductController extends Controller
                 'name.max' => 'Tên sản tối đa 50 ký tự',
                 'price.required' => 'Hãy nhập giá sp',
                 'amount.required' => 'Hãy nhập số lượng sp',
-                'description.required' => 'Hãy nhập mô tả sản phẩm',
                 'up_image.mimes' => 'Ảnh chỉ nhận đuôi :jpg,bmp,png'
             ]
         );
@@ -97,17 +102,21 @@ class ProductController extends Controller
             $path = $request->file('up_image')->storeAs('public/uploads/products',  $request->up_image->getClientOriginalName());
             $products->image = str_replace('public/', '', $path);
         }
-        $products->fill($request->all());
+
+        foreach ($request->attribute_values as $key => $values) {
+            $attr = Product_ValueAtt::where('id_prd', $products->id)
+                ->where('attribute_id', $key)->first();
+            $attr->fill([
+                'values_id' => $values
+            ]);
+            $attr->save();
+        }
         $products->save();
         return redirect(route('list.prd'));
     }
     public function detail($id)
     {
         $detail = Products::find($id);
-        // $comment = DB::table('comment')
-        //     ->select('content', 'customer_name')
-        //     ->where('id_prd',$id)
-        //     ->get();
         $comment = Comment::select('content', 'customer_name')->where('id_prd', $id)->get();
         return view('frontend.detail_prd', compact('detail', 'comment'));
     }
