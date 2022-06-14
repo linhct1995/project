@@ -50,6 +50,11 @@ class CateController extends Controller
         $cate = Cate::all();
         return view('admin.categories.list_cate', compact('cate'));
     }
+    public function listFront()
+    {
+        $cate = Cate::all();
+        return view('frontend.layouts.navbar', compact('cate'));
+    }
     public function delete($id)
     {
         $cate = Cate::find($id);

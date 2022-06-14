@@ -37,7 +37,7 @@ use Illuminate\Support\Facades\DB;
                     <div><img src="{{asset( 'storage/' . $product->image)}}" width="100" /></div>
                     <div class="detail">
                         <div>Tên sản phẩm:{{$product->name}}</div>
-                        <div>Giá sản phẩm:{{$product->price}}</div>
+                        <div>Giá sản phẩm:{{ number_format($product->price)}} đ</div>
                         <div>Số lượng:{{$product->amount}}</div>
                         <div>Trạng thái:
                             <?php if ($product->amount > 0) { ?>
@@ -52,6 +52,7 @@ use Illuminate\Support\Facades\DB;
             <td class="flex-container">{{$product->cate->name}}</td>
             <td class="flex-container">{{$product->brand->name}}</td>
             <td>
+
                 <table class="table">
                     <tbody>
                         @foreach($product->Attribute as $items)

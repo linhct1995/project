@@ -37,6 +37,7 @@ Route::get('/registration', [UserController::class,'registration'])->name('regis
 Route::post('/registration', [UserController::class,'saveRegistration']);
 Route::get('/Log-in', [UserController::class,'login'])->name('login');
 Route::post('/Log-in', [UserController::class,'saveLogin']);
+Route::get('/LogOut', [UserController::class,'logout'])->name('logout');
 Route::get('/Detail/{id}', [ProductController::class,'detail'])->name('detail.prd');
 Route::post('/Comment', [CommentController::class,'comment'])->name('comment.prd');
 //Admin
@@ -77,7 +78,7 @@ Route::prefix('admin')->group(function () {
     Route::prefix('brand')->group(function () {
         Route::get('create', [BrandingController::class, 'create'])->name('create.brand');
         Route::post('create', [BrandingController::class, 'saveBrand']);
-        // Route::get('list', [CateController::class, 'list'])->name('list.cate');
+        Route::get('list', [BrandingController::class, 'list'])->name('list.brand');
         // Route::get('delete/{id}', [CateController::class, 'delete'])->name('delete.cate');
         // Route::get('edit/{id}', [CateController::class, 'edit'])->name('edit.cate');
         // Route::post('edit/{id}', [CateController::class, 'saveEdit']);

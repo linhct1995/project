@@ -59,15 +59,18 @@
     </div>
     <div style="font-weight: bold;">Thông số kỹ thuật sản phẩm</div>
     <div class="row">
+        
         @foreach($attribute as $item)
         <div class="col-3">
             <label for="">{{$item -> name}}</label>
             <input type="hidden" name="attribute_id[]" value="{{$item->id}}">
-
+            
             <select name="attribute_values[{{$item->id}}]" id="">
                 <option value="">Chọn</option>
+                
                 @foreach($item->attValue as $items)
-                <option value="{{$items -> id}}" {{ $prd_att  = $items->id ? "selected" : "" }} > {{$items -> values}} </option>
+               
+                <option value="{{$items -> id}}" {{ $att_value[$items->attribute_id] == $items->id ? "selected" : "" }} > {{$items -> values}} </option>
                 @endforeach
             </select>
         </div>

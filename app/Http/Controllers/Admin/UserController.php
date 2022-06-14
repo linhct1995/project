@@ -16,7 +16,7 @@ class UserController extends Controller
     }
     public function saveRegistration(Request $req)
     {
-        $customer = User::create([
+        User::create([
             'name' => $req->name,
             'phone' => $req->phone,
             'address' => $req->address,
@@ -24,6 +24,7 @@ class UserController extends Controller
             'email' => $req->email,
             'type' => '5',
         ]);
+        return redirect(route('front.index'));
     }
     public function login()
     {
@@ -32,15 +33,15 @@ class UserController extends Controller
     public function saveLogin(Request $req)
     {
         $info = $req->only('email', 'password');
-        // dd($info);
         $info['type'] = 5;
-        // $user = User::all();
-      
         if (Auth::attempt($info)) {
-            // $user = Auth::user()->name;
-            // dd(Auth::user()->name);
             return redirect(route('front.index'));
         }
         
+    }
+    public function logout()
+    {
+        Auth::logout();
+        return redirect(route('front.index'));
     }
 }

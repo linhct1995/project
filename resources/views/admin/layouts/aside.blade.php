@@ -128,7 +128,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{route('list.cate')}}" class="nav-link active">
+              <a href="{{route('list.brand')}}" class="nav-link active">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Danh sách thương hiệu </p>
               </a>

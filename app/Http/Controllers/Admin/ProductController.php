@@ -39,7 +39,6 @@ class ProductController extends Controller
             'brand_id' => $request->brand_id
         ]);
         foreach ($request->attribute_values as $key => $values) {
-            // $values = Attribute_Values::find($values)->values;
             Product_ValueAtt::create([
                 'id_prd' => $products->id,
                 'values_id' =>   $values,
@@ -50,7 +49,6 @@ class ProductController extends Controller
     }
     public function list(Request $request)
     {
-        // $products = Products::all();
         $productQuery = Products::where('name', 'like', "%" . $request->keyword . "%");
         $products = $productQuery->paginate(3);
         // if ($request->key!= "") {
@@ -72,13 +70,17 @@ class ProductController extends Controller
         $cate = Cate::all();
         $brand = Branding::all();
         $attribute = Attribute::all();
-        $prd_att = DB::table('product_attribute_values')->where('id_prd', $id)->pluck('values_id')->toArray();
-        // dd($prd_att);
+        $prd_att = DB::table('product_attribute_values')->where('id_prd', $id)->get();
+        $att_value = [];
+        foreach($prd_att as $item){
+            $att_value[$item->attribute_id] = $item->values_id;
+        }
+
         /* 
         so sánh value_id ở bảng prd_att_vale 
         có trùng  vs id ở bảng att_value hay ko : đã lấy  xong 
         */
-        return view('admin.products.edit_prd', compact('products', 'cate', 'brand', 'attribute','prd_att'));
+        return view('admin.products.edit_prd', compact('products', 'cate', 'brand', 'attribute','att_value'));
     }
     public function saveEdit($id, Request $request)
     {
@@ -117,7 +119,30 @@ class ProductController extends Controller
     public function detail($id)
     {
         $detail = Products::find($id);
+        $getProductSame = Products::all();
+        $ccc = $this->getProductSame($id);
+        $getAttriValue =  $this->atribueteValue($id);
         $comment = Comment::select('content', 'customer_name')->where('id_prd', $id)->get();
-        return view('frontend.detail_prd', compact('detail', 'comment'));
+        /*
+        lấy dữ liệu product theo cate_id
+        */
+        return view('frontend.detail_prd', compact('detail', 'comment','getAttriValue','ccc'));
+    }
+    public function atribueteValue($id)
+    {
+        $zzz = [];
+        $fff = Product_ValueAtt::where('id_prd',$id)->get();
+        foreach($fff as $hhh){
+            $zzz[Attribute::find($hhh->attribute_id)->name] = Attribute_Values::find($hhh->values_id)->values;
+        }
+       return $zzz;
+    }
+    public function getProductSame($id)
+    {
+
+        $vvv = Products::find($id);
+            // lấy tất cả  sản phẩm có brand giống nhau
+            $ccc = DB::table('products')->where('brand_id',$vvv->brand_id)->inRandomOrder()->limit(4)->get();
+        return $ccc;
     }
 }

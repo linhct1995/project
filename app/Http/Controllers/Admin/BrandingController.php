@@ -25,5 +25,10 @@ class BrandingController extends Controller
         $brand->save();
         return redirect(route('create.brand'));
     }
+    public function list()
+    {
+        $brand = Branding::all();
+        return view('admin.brand.list',compact('brand'));
+    }
         
 }

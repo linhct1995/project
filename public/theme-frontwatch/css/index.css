@@ -1,0 +1,271 @@
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+header {
+    width: 100%;
+    height: 60px;
+}
+header{
+    width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+}  
+.navbar{
+    display: flex;
+    gap: 10px;
+}
+.navbar-item>a{
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+}
+.navbar-item .subnav{
+    display: none;
+    position: absolute;
+    list-style: none;
+    width: 200px;
+    background-color: whitesmoke;
+}
+.navbar-item:hover .subnav{
+    display: block;
+}
+.subnav a{
+    text-decoration: none;
+    color: black;
+}
+.subnav>li{
+    padding: 10px 0px;
+}
+.logo{
+    display: flex;
+    justify-content: center;
+}
+.logo img{
+    width: 180px;
+}
+.header-item-form{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+.warp{
+    position: relative;
+}
+.header-cart{
+    position: relative;
+}
+.header-cart i{
+    font-size: 20px;
+}
+.header-cart-dropdown{
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 300px;
+    background-color: white;
+    border: 1px solid;
+    margin-top: 5px;
+    padding: 20px;
+    display: none;
+    z-index: 99;
+}
+.header-cart-item{
+    display: flex;
+    margin-top: 10px;
+}
+.header-cart-image{
+    width: 50px;
+    height: 50px;
+}
+.header-cart-image>img{
+    width: 100%;
+    height: 100%;
+}
+.warp:hover .header-cart-dropdown{
+    display: block;
+}
+.header-cart::after{
+    position: absolute;
+    content: "";
+    width: 350px;
+    height: 20px;
+    top: 80%;
+    right: 0;
+}
+.delete-item>i{
+position: relative;
+margin-left: 25px;
+margin-top: 10px;
+}
+.login{
+    margin-left: 30px;
+}
+.login>a{
+    text-align: center;
+    text-decoration: none;
+}
+.banner {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.banner_image>img {
+    width: 100%;
+    height: 800px;
+}
+
+.title_clock {
+    color: white;
+    /* z-index: 10; */
+    position: relative;
+    margin-top: -300px;
+    margin-left: 50px;
+}
+
+.title_clock>span {
+    font-size: 25px;
+}
+
+.title_clock>h1 {
+    font-size: 80px;
+    padding-top: 30px;
+}
+
+.cate_watch {
+    margin-top: 150px;
+}
+.famous_brand>img {
+    display: block;
+    margin: 20px auto;
+    filter: brightness(40%);
+}
+
+.frames_famous_brand {
+    width: 560px;
+    height: 520px;
+    border: white 5px solid;
+    margin: auto;
+    position: relative;
+    margin-top: -550px;
+    text-align: center;
+}
+
+.title_famous_brand {
+    color: white;
+    margin-top: 380px;
+}
+
+.shopify-section {
+    width: 100%;
+}
+
+.shopify-section-title>h5 {
+    text-align: center;
+    font-weight: bold;
+}
+
+.image-wrap {
+    margin-top: 40px;
+}
+
+.collection-item-image>img {
+    width: 95%;
+    height: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* position: relative; */
+    /* z-index: -1; */
+    border-radius: 5px;
+}
+
+.collection-item-name {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    font-weight: bold;
+    bottom: 50px;
+    color: white;
+    font-size: 18px;
+}
+
+.product {
+    margin-top: 50px;
+}
+
+.product>img {
+    border-radius: 5px;
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.information-product {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.name-product {
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+}
+.name-product>a{
+    text-decoration: none;
+}
+.product-price {
+    text-align: center;
+    color: rgb(192, 33, 33);
+}
+
+.product-status {
+    margin-left: 50px;
+}
+
+.cart {
+    margin-left: 30px;
+}
+footer{
+    margin-top: 120px;
+}
+.contact{
+    width: 90%;
+    margin: auto;
+    background: white;
+}
+.location {
+    text-align: center;
+    padding: 15px 0px 30px 0px;
+    font-weight: bold;
+}
+
+.store_1,
+.store_2,
+.store_3 {
+    padding: 10px;
+}
+.grid_title{
+    text-align: center;
+    padding: 15px 0px 30px 0px;
+    font-weight: bold;
+}
+.content{
+    list-style: none;
+}
+.content>li{
+    padding: 10px;
+}
+.title_contact{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    font-size: 15px;
+    position: relative;
+    top: 50px;
+}
