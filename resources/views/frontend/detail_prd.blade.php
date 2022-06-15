@@ -19,7 +19,7 @@
 <form action=""  id="form">
     @csrf
     <label for="">Bình luận</label>
-    @if(Auth::user() != null)
+    @if(Auth::user() != null)   
     <input class="form-comment" type="hidden" name="customer_name" value="{{Auth::user()->name}}">
     @endif
     <input class="form-comment" type="hidden" name="id_prd" value="{{$detail->id}}">
@@ -92,38 +92,39 @@
         <div class="information_product col-6">
             <div class="title">Thông số kỹ tduật</div>
             <table class="table">
-                
+
                 <tbody>
                     <tr>
                         <td style="font-weight: bold;">Thương hiệu</td>
                         <td>{{$detail->name}}</td>
-                    </tr>                
+                    </tr>
                     @foreach($getAttriValue as $key => $items)
                     <tr>
                         <td style="font-weight: bold;">{{$key}}</td>
-                        <td >{{$items}}</td>
+                        <td>{{$items}}</td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-            <div class="add_cart"><button>Đặt mua ngay</button></div>
+            <div class="add_cart" onclick="AddCart({{$detail->id}})"><button>Đặt mua ngay</button></div>
         </div>
     </div>
     <div class="comment">Viết bình luận</div>
-    <form action="" class="form">
-        <textarea name="" id="" cols="190" rows="5"></textarea> <br>
+    <form action="" class="form" id="form">
+        @csrf
+        @if(Auth::user() != null)
+        <input class="form-comment" type="hidden" name="customer_name" value="{{Auth::user()->name}}">
+        @endif
+        <input class="form-comment" type="hidden" name="id_prd" value="{{$detail->id}}">
+       <textarea class="form-comment" name="comment" id="comment" cols="190" rows="5"></textarea>
         <button type="submit">Gửi</button>
     </form>
     <div class="show_comment">
         <div class="title_comment">Bình luận của khách hàng</div>
-        <div class="customer_name">Khách hàng : Cao Tuấn Linh</div>
-        <div class="content_comment">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio nulla nisi, quaerat asperiores amet dolore! Impedit consectetur, dolore, harum id fugiat sint iure ipsa beatae earum similique, nulla autem inventore.
-        </div>
-        <div class="customer_name">Khách hàng : Cao Tuấn Linh</div>
-        <div class="content_comment">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio nulla nisi, quaerat asperiores amet dolore! Impedit consectetur, dolore, harum id fugiat sint iure ipsa beatae earum similique, nulla autem inventore.
-        </div>
+        @foreach($comment as $key => $item)  
+        <div class="customer_name">Khách hàng : {{$item -> customer_name}}</div>
+        <div class="content_comment"> Nội dung :{{$item -> content}} </div>
+        @endforeach
     </div>
     <hr>
     <div class="related_products">
@@ -135,13 +136,13 @@
                 <div class="name-product"><a href="">{{$items->name}}</a></div>
                 <div class="product-price">{{number_format($items->price)}} ₫</div>
                 <span class="product-status">
-                Tình trạng : 
-                <?php if ($items->amount > 0) { ?>
-                                <span class="text-primary">Còn hàng</span>
-                            <?php } else { ?>
-                                <span class="text-danger">Hết hàng</span>
-                            <?php } 
-                ?>
+                    Tình trạng :
+                    <?php if ($items->amount > 0) { ?>
+                        <span class="text-primary">Còn hàng</span>
+                    <?php } else { ?>
+                        <span class="text-danger">Hết hàng</span>
+                    <?php }
+                    ?>
                 </span>
                 <span class="cart"><button>Mua hàng</button></span>
             </div>
@@ -150,5 +151,28 @@
     </div>
     @include("frontend.layouts.footer")
 </body>
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    const formElement = document.getElementById('form');
+    formElement.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let a = document.getElementsByClassName("form-comment");
+        const data = {};
+        [...a].forEach(element => {
+            let key = element.getAttribute('name');
+            let value =element.value;            
+            data[key] = value;           
+        });
+        data['_token'] ='{{ csrf_token() }}';
+        $.ajax({
+                url : "/Comment",
+                type : "POST",
+                data: data
+            }).done(function(ok){
+                Swal.fire('Đăng bài thành công');
+                $('#comment').val('');
+            });
+    });
+</script> -->
 </html>

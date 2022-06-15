@@ -19,17 +19,17 @@
                 <td class="cart-title first-row">
                     <h5>{{$item['productInfo']->name}}</h5>
                 </td>
-                <td class="p-price first-row">{{$item['productInfo']->price}}</td>
+                <td class="p-price first-row">{{number_format($item['productInfo']->price)}}</td>
                 <td class="qua-col first-row">
                     <div class="quantity">
                         <div class="pro-qty">
-                            <input type="text" value="{{$item['quanty']}}">
+                        <input id="quanty-item-{{$item['productInfo']->id}}" type="text" value="{{$item['quanty']}}">
                         </div>
                     </div>
                 </td>
-                <td class="total-price first-row">{{$item['price']}}</td>
-                <td class="close-td first-row" onclick="DeleteItemCart({{$item['productInfo']->id}})"><i class="ti-close"></i></td>
-                <td class="close-td first-row"><i class=" ti-save"></i></td>
+                <td class="total-price first-row">{{number_format($item['price'])}}</td>
+                <td class="close-td first-row" onclick="DeleteItemCart({{$item['productInfo']->id}})"><i class="fas fa-trash"></i></td>
+                <td class="close-td first-row"><i class="fas fa-save" onclick="SaveItemCart({{$item['productInfo']->id}})"></i></td>
             </tr>
             @endforeach
             @endif

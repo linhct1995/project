@@ -53,7 +53,7 @@
                         <td class="cart-title first-row">
                             <h5>{{$item['productInfo']->name}}</h5>
                         </td>
-                        <td class="p-price first-row">{{$item['productInfo']->price}}</td>
+                        <td class="p-price first-row">{{number_format($item['productInfo']->price)}}</td>
                         <td class="qua-col first-row">
                             <div class="quantity">
                                 <div class="pro-qty">
@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="total-price first-row">{{$item['price']}}</td>
+                        <td class="total-price first-row">{{number_format($item['price'])}}</td>
                     </tr>
                     @endforeach
                     @endif
@@ -78,7 +78,7 @@
                         <td class="cart-title first-row">
                             <h5>{{$item['productInfo']->name}}</h5>
                         </td>
-                        <td class="p-price first-row">{{$item['productInfo']->price}}</td>
+                        <td class="p-price first-row">{{number_format($item['productInfo']->price)}}</td>
                         <td class="qua-col first-row">
                             <div class="quantity">
                                 <div class="pro-qty">

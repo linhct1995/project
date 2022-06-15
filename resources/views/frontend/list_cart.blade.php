@@ -13,41 +13,13 @@
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="{{ asset('template/css/bootstrap.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('template/css/font-awesome.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('template/css/themify-icons.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('template/css/elegant-icons.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('template/css/owl.carousel.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('template/css/nice-select.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('template/css/jquery-ui.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('template/css/slicknav.min.css')}}" type="text/css">
+    
     <link rel="stylesheet" href="{{ asset('template/css/style.css')}}" type="text/css">
+    @include('frontend.layouts.style')
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <!-- <div id="preloder">
-        <div class="loader"></div>
-    </div> -->
-
-
-    <!-- Breadcrumb Section Begin -->
-    <div class="breacrumb-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb-text product-more">
-                        <a href="./home.html"><i class="fa fa-home"></i> Home</a>
-                        <a href="./shop.html">Shop</a>
-                        <span>Shopping Cart</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb Section Begin -->
-
-    <!-- Shopping Cart Section Begin -->
+@include("frontend.layouts.navbar")
     <section class="shopping-cart spad">
         <div class="container">
             <div class="row">
@@ -76,7 +48,7 @@
                                     <td class="cart-title first-row">
                                         <h5>{{$item['productInfo']->name}}</h5>
                                     </td>
-                                    <td class="p-price first-row">{{$item['productInfo']->price}}</td>
+                                    <td class="p-price first-row">{{number_format($item['productInfo']->price)}}</td>
                                     <td class="qua-col first-row">
                                         <div class="quantity">
                                             <div class="pro-qty">
@@ -84,9 +56,9 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="total-price first-row">{{$item['price']}}</td>
-                                    <td class="close-td first-row" onclick="DeleteItemCart({{$item['productInfo']->id}})"><i class="ti-close"></i></td>
-                                    <td class="close-td first-row"><i class=" ti-save" onclick="SaveItemCart({{$item['productInfo']->id}})"></i></td>
+                                    <td class="total-price first-row">{{number_format($item['price'])}}</td>
+                                    <td class="close-td first-row" onclick="DeleteItemCart({{$item['productInfo']->id}})"><i class="fas fa-trash"></i></td>
+                                    <td class="close-td first-row"><i class="fas fa-save" onclick="SaveItemCart({{$item['productInfo']->id}})"></i></td>
                                 </tr>
                                 @endforeach
                                 @endif
@@ -99,7 +71,7 @@
                                 @if(Session::has("Cart") != null)
                                 <ul>
                                     <li class="subtotal">TotalQuanty <span>{{Session::get("Cart")->totalQuanty}}</span></li>
-                                    <li class="cart-total">TotalPrice <span>$ {{Session::get("Cart")->totaPrice}}</span></li>
+                                    <li class="cart-total">TotalPrice <span>{{number_format(Session::get("Cart")->totaPrice)}}</span></li>
                                 </ul>
                                 <a href="{{route('checkout')}}" class="proceed-btn">PROCEED TO CHECK OUT</a>
                                 @endif

@@ -39,9 +39,10 @@ class UserController extends Controller
         }
         
     }
-    public function logout()
+    public function logout(Request $req)
     {
         Auth::logout();
+        $req->session()->forget('Cart');
         return redirect(route('front.index'));
     }
 }

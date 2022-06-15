@@ -43,66 +43,31 @@ $cate = Cate::all();
                 <a href=""><i class="fas fa-cart-arrow-down"></i></a>
             </div>
             <div class="header-cart-dropdown">
-                <div class="header-cart-wrap">
+                <div class="header-cart-wrap" id="chang-item-cart">
+                    @if(Session::has("Cart") != null)
+                    @foreach(Session::get("Cart")->products as $item)
                     <div class="header-cart-item">
+
                         <div class="header-cart-image">
-                            <img src="{{asset('theme-frontwatch/image/A159WAD-1D-1-1633578953344.jpg')}}" alt="">
+                            <img src="{{asset( 'storage/' . $item['productInfo']->image)}}" alt="">
                         </div>
                         <div class="header-cart-info">
-                            <div class="header-cart-item-name">Kabino Bedside Table</div>
-                            <div class="header-cart-item-price">66.000 x 1</div>
+                            <div class="header-cart-item-name" style="font-size: 15px;">{{$item['productInfo']->name}}</div>
+                            <div class="header-cart-item-price">{{number_format($item['productInfo']->price)}} x {{$item['quanty']}}</div>
                         </div>
-                        <div class="delete-item">
-                            <i class="fas fa-trash"></i>
+                        <div class="delete-item ">
+                            <i class="fas fa-trash" data-id="{{$item['productInfo']->id}}"></i>
                         </div>
                     </div>
-                    <div class="header-cart-item">
-                        <div class="header-cart-image">
-                            <img src="{{asset('theme-frontwatch/image/A159WAD-1D-1-1633578953344.jpg')}}" alt="">
-                        </div>
-                        <div class="header-cart-info">
-                            <div class="header-cart-item-name">Kabino Bedside Table</div>
-                            <div class="header-cart-item-price">66.000 x 1</div>
-                        </div>
-                        <div class="delete-item">
-                            <i class="fas fa-trash"></i>
-                        </div>
+
+                    @endforeach
+                    <div class="select-total">
+                        <span>Total:</span>
+                        <span>{{number_format(Session::get("Cart")->totaPrice)}}</span>
                     </div>
-                    <div class="header-cart-item">
-                        <div class="header-cart-image">
-                            <img src="{{asset('theme-frontwatch/image/A159WAD-1D-1-1633578953344.jpg')}}" alt="">
-                        </div>
-                        <div class="header-cart-info">
-                            <div class="header-cart-item-name">Kabino Bedside Table</div>
-                            <div class="header-cart-item-price">66.000 x 1</div>
-                        </div>
-                        <div class="delete-item">
-                            <i class="fas fa-trash"></i>
-                        </div>
-                    </div>
-                    <div class="header-cart-item">
-                        <div class="header-cart-image">
-                            <img src="{{asset('theme-frontwatch/image/A159WAD-1D-1-1633578953344.jpg')}}" alt="">
-                        </div>
-                        <div class="header-cart-info">
-                            <div class="header-cart-item-name">Kabino Bedside Table</div>
-                            <div class="header-cart-item-price">66.000 x 1</div>
-                        </div>
-                        <div class="delete-item">
-                            <i class="fas fa-trash"></i>
-                        </div>
-                    </div>
-                    <div class="header-cart-item">
-                        <div class="header-cart-image">
-                            <img src="{{asset('theme-frontwatch/image/A159WAD-1D-1-1633578953344.jpg')}}" alt="">
-                        </div>
-                        <div class="header-cart-info">
-                            <div class="header-cart-item-name">Kabino Bedside Table</div>
-                            <div class="header-cart-item-price">66.000 x 1</div>
-                        </div>
-                        <div class="delete-item">
-                            <i class="fas fa-trash"></i>
-                        </div>
+                    @endif
+                    <div class="list_cart">
+                        <a href="{{route('list.cart')}}">List Cart</a>
                     </div>
                 </div>
             </div>
@@ -123,3 +88,30 @@ $cate = Cate::all();
         @endif
     </div>
 </header>
+<script>
+    function AddCart(id) {
+        let AuthUser = "{{{ (Auth::user()) ? Auth::user()->id : null }}}";
+        if (AuthUser) {
+            $.ajax({
+                url: 'AddCart/' + id,
+                type: 'GET'
+            }).done(function(response) {
+                $("#chang-item-cart").empty();
+                $("#chang-item-cart").html(response);
+                Swal.fire('Đã thêm vào giỏ hàng');
+            });
+        } else {
+            Swal.fire('Bạn chưa đăng nhập nên không thể mua hàng');
+        }
+    }
+    $('#chang-item-cart').on("click", ".delete-item i", function() {
+        $.ajax({
+            url: 'DeleteItemCart/' + $(this).data("id"),
+            type: 'GET'
+        }).done(function(response) {
+            $("#chang-item-cart").empty();
+            $("#chang-item-cart").html(response);
+            alertify.success('Xoá sản phẩm thành công');
+        });
+    });
+</script>
