@@ -90,10 +90,11 @@ $cate = Cate::all();
 </header>
 <script>
     function AddCart(id) {
+        console.log(id);
         let AuthUser = "{{{ (Auth::user()) ? Auth::user()->id : null }}}";
         if (AuthUser) {
             $.ajax({
-                url: 'AddCart/' + id,
+                url: '/AddCart/' + id,
                 type: 'GET'
             }).done(function(response) {
                 $("#chang-item-cart").empty();

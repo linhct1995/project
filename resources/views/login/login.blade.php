@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="widtd=device-widtd, initial-scale=1.0">
-    @include('frontend.layouts.style_login')
-    <title>Login</title>
-</head>
-
-<body>
-    @include("frontend.layouts.navbar")
-    <hr>
+@extends('frontend.index')
+@section('style')
+<link rel="stylesheet" href=" {{ asset('theme-frontwatch/css/login.css')}}">
+@endsection
+@section('content')
+<hr>
     <div class="main">
         <div class="form-title">
             <div class="title-login">Login</div>
@@ -40,7 +32,4 @@
         </div>
     </div>
     </div>
-    @include("frontend.layouts.footer")
-</body>
-
-</html>
+@endsection
