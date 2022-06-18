@@ -101,7 +101,7 @@
                         <li class="subtotal">TotalQuanty <span>{{Session::get("Cart")->totalQuanty}}</span></li>
                         <li class="cart-total">TotalPrice <span>$ {{Session::get("Cart")->totaPrice}}</span></li>
                     </ul>
-                    <button>Thanh toán</button>
+                    <button>Thanh toáne</button>
                     @endif
                 </div>
             </div>
