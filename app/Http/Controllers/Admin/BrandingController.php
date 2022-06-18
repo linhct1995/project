@@ -15,7 +15,7 @@ class BrandingController extends Controller
     public function saveBrand( Request $request)
     {
         if ($request->hasFile('up_image')) {
-            $path = $request->file('up_image')->storeAs('public/uploads/products',  $request->up_image->getClientOriginalName());
+            $path = $request->file('up_image')->storeAs('app/public/uploads/products',  $request->up_image->getClientOriginalName());
             $image = str_replace('public/', '', $path);
         }
         $brand = Branding::create([
