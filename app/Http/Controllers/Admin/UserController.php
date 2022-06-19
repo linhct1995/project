@@ -37,12 +37,26 @@ class UserController extends Controller
         if (Auth::attempt($info)) {
             return redirect(route('front.index'));
         }
-        
     }
     public function logout(Request $req)
     {
         Auth::logout();
         $req->session()->forget('Cart');
         return redirect(route('front.index'));
+    }
+    public function loginAdmin()
+    {
+        return view('admin.login.login');
+    }
+    public function saveAdminLogin(Request $req)
+    {
+        $info = $req->only('email', 'password');
+        $info['type'] = 1;
+        if (Auth::attempt($info)) {
+            return redirect(route('admin.index'));
+        }
+        else{
+            return redirect()->back()->with('message','Bạn không phải là admin');
+        }
     }
 }
