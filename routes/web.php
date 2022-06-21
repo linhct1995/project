@@ -48,20 +48,14 @@ Route::post('/Comment', [CommentController::class, 'comment'])->name('comment.pr
 //Admin
 Route::get('/Login', [UserController::class, 'loginAdmin'])->name('login.admin');
 Route::post('/Login', [UserController::class, 'saveAdminLogin']);
-Route::prefix('admin')->middleware('check-type')->group(function () {
+Route::prefix('admin')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('admin.index');
-    // Route::get('/Login', [UserController::class, 'loginAdmin'])->name('login.admin');
-    
-    // Route::any('logout', function () {
-    //     Auth::logout();
-    //     return redirect(route('login.admin'));
-    // })->name('logout');
     Route::prefix('product')->group(function () {
         Route::get('create', [ProductController::class, 'create'])->name('create.prd');
         Route::post('create', [ProductController::class, 'saveAdd']);
         Route::get('list', [ProductController::class, 'list'])->name('list.prd');
         Route::get('delete/{id}', [ProductController::class, 'delete'])->name('delete.prd');
-        Route::get('edit/{id}', [ProductController::class, 'edit'])->middleware('check-role-admin')->name('edit.prd');
+        Route::get('edit/{id}', [ProductController::class, 'edit'])->name('edit.prd');
         Route::post('edit/{id}', [ProductController::class, 'saveEdit']);
     });
     Route::prefix('attribute')->group(function () {
