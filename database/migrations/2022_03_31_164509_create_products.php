@@ -19,7 +19,8 @@ class CreateProducts extends Migration
             $table->string('image');
             $table->integer('price');
             $table->integer('amount');
-            $table->string('cate_id');
+            $table->integer('cate_id');
+            $table->integer('brand_id');
             $table->timestamps();
         });
     }
