@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CheckAdmin
+class RoleAdmin
 {
     /**
      * Handle an incoming request.
@@ -17,21 +17,19 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-
+        // check đăng nhập chưa
         if (Auth::check())
         {
             $user = Auth::user();
             // nếu type =1 or 2 (admin) thì cho qua.
-            if ($user->type == 1 || $user->type == 2 )
+            if ($user->type == 1 )
             {
                 return $next($request);
             }
             else
             {
-                return redirect(route('login.admin'));
+                return redirect(route('admin.index'));
             }
-        } else
-        return redirect(route('login.admin'));
-        
+        }
     }
 }

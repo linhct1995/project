@@ -50,8 +50,12 @@ class UserController extends Controller
     }
     public function saveAdminLogin(Request $req)
     {
-        $info = $req->only('email', 'password');
-        $info['type'] = 1;
+        // $info = $req->only('email', 'password');
+        // $info['type'] = 1;
+        $info = [
+            'email' => $req->email,
+            'password' => $req->password,
+        ];
         if (Auth::attempt($info)) {
             return redirect(route('admin.index'));
         }

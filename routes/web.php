@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\Properties_PrdController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\FrontEnd\CartController;
 use App\Http\Controllers\FrontEnd\FrontController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
 //FrontEnd
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
 Route::get('/List-Cart', [CartController::class, 'ListCart'])->name('list.cart');
@@ -44,7 +48,7 @@ Route::post('/Comment', [CommentController::class, 'comment'])->name('comment.pr
 //Admin
 Route::get('/Login', [UserController::class, 'loginAdmin'])->name('login.admin');
 Route::post('/Login', [UserController::class, 'saveAdminLogin']);
-Route::prefix('admin')->middleware('check-role')->group(function () {
+Route::prefix('admin')->middleware('check-type')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('admin.index');
     // Route::get('/Login', [UserController::class, 'loginAdmin'])->name('login.admin');
     
@@ -57,7 +61,7 @@ Route::prefix('admin')->middleware('check-role')->group(function () {
         Route::post('create', [ProductController::class, 'saveAdd']);
         Route::get('list', [ProductController::class, 'list'])->name('list.prd');
         Route::get('delete/{id}', [ProductController::class, 'delete'])->name('delete.prd');
-        Route::get('edit/{id}', [ProductController::class, 'edit'])->name('edit.prd');
+        Route::get('edit/{id}', [ProductController::class, 'edit'])->middleware('check-role-admin')->name('edit.prd');
         Route::post('edit/{id}', [ProductController::class, 'saveEdit']);
     });
     Route::prefix('attribute')->group(function () {
