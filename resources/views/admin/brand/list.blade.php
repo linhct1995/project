@@ -38,7 +38,7 @@
         <tr>
             <td>{{$loop->iteration}}</td>
             <td>{{$brand->name}}</td>
-            <td><img src="{{asset( 'storage/' . $brand->image)}}" width="100" /></div></td>
+            <td><img src="{{asset( 'storage/public/' . $brand->image)}}" width="100" /></div></td>
             <td>
                 <a  class="btn btn-info">Sửa</a>
                 <a  class="btn btn-danger" onclick="return confirm('Bạn có muốn xoá sản phẩm không');">Xóa</a>
