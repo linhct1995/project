@@ -36,11 +36,8 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              
-              <li class="breadcrumb-item active"><a href="/">Login</a></li>
-              <li class="breadcrumb-item active"><a href="/">Logout</a></li>
-              <li class="breadcrumb-item active"><a href="/">Đổi mật khẩu</a></li>
-              
+              <li class="breadcrumb-item active"><a href="{{route('logout.admin')}}">Logout</a></li>    
+              <li class="breadcrumb-item active"><a href="{{route('admin.register')}}">Register</a></li>            
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->

@@ -34,7 +34,7 @@ $cate = Cate::all();
     <div class="header-item-form">
         <div class="form">
             <form action="" class="search">
-                <input type="text">
+                <input type="text" placeholder="tìm sản phẩm" name="keyword">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
@@ -73,7 +73,7 @@ $cate = Cate::all();
             </div>
         </div>
         <div class="login">
-            @if(Auth::user() != null)
+            @if(Auth::user() != null  )
             Xin chào : {{Auth::user()->name }}
             <div class="logout">
                 <a href="{{route('logout')}}" style="text-decoration: none;">Đăng xuất</a>
@@ -81,9 +81,9 @@ $cate = Cate::all();
             @endif
 
         </div>
-        @if (Auth::user() == null)
+        @if (Auth::user() == null  )
         <div class="login">
-            <a href="{{route('login')}}">Đăng nhập/Đăng ký</a>
+            <a href="{{route('login.user')}}">Đăng nhập/Đăng ký</a>
         </div>
         @endif
     </div>

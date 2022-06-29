@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Admin_User;
+
 return [
 
     /*
@@ -46,6 +48,11 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
     ],
 
     /*
@@ -75,6 +82,10 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => Admin_User::class,
+        ],
     ],
 
     /*

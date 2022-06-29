@@ -13,7 +13,10 @@
         <img src="{{ asset('admin-theme/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="/" class="d-block">Tuấn linh</a>
+      @if(Auth::user() != null  )         
+            <a href="/" class="d-block"> Xin chào : {{Auth::user()->name }}</a>
+       @endif
+       
       </div>
     </div>
 

@@ -21,7 +21,7 @@
 </style>
 <form action="" method="get">
     <label for="">Tìm kiếm</label>
-    <input type="text" name="keyword" placeholder="tìm tên danh mục">
+    <input type="text" name="keyword" placeholder="tìm tên thương hiệu">
     <button type="submit">Tìm</button>
 </form>
 <table class="table">
@@ -34,19 +34,21 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($brand as $brand)
+        @foreach($brand as $brands)
         <tr>
             <td>{{$loop->iteration}}</td>
-            <td>{{$brand->name}}</td>
-            <td><img src="{{asset( 'storage/public/' . $brand->image)}}" width="100" /></div></td>
+            <td>{{$brands->name}}</td>
+            <td><img src="{{asset( 'storage/' . $brands->image)}}" width="100" /></div></td>
             <td>
                 <a  class="btn btn-info">Sửa</a>
-                <a  class="btn btn-danger" onclick="return confirm('Bạn có muốn xoá sản phẩm không');">Xóa</a>
+                <a href="{{route('delete.brand', ['id' => $brands->id])}}"  class="btn btn-danger" onclick="return confirm('Bạn có muốn xoá sản phẩm không');">Xóa</a>
             </td>
         </tr>
         @endforeach
 
     </tbody>
 </table>
-
+<div class="d-flex justify-content-end">
+    {{$brand->links()}}
+</div>
 @endsection

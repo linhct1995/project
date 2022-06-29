@@ -34,7 +34,7 @@ use Illuminate\Support\Facades\DB;
         <tr>
             <td>
                 <div class="flex-container">
-                    <div><img src="{{asset( 'storage/public/' . $product->image)}}" width="100" /></div>
+                    <div><img src="{{asset( 'storage/' . $product->image)}}" width="100" /></div>
                     <div class="detail">
                         <div>Tên sản phẩm:{{$product->name}}</div>
                         <div>Giá sản phẩm:{{ number_format($product->price)}} đ</div>

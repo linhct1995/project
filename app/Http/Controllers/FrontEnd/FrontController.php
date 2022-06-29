@@ -9,9 +9,10 @@ use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
-    public function index()
+    public function index(Request $req)
     {
-        $product = Products::all();
+        $productQuery = Products::where('name', 'like', "%" . $req->keyword . "%");
+        $product = $productQuery->paginate(8);
         $brand = Branding::all();
         return view('frontend.home',compact('product','brand'));
     }

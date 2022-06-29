@@ -10,6 +10,6 @@ class Cate extends Model
     use HasFactory;
     protected $table = "categories";
     public $fillable = [
-        'name','parent'
+        'name','parent','image'
     ];
 }

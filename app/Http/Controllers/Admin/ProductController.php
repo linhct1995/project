@@ -27,7 +27,7 @@ class ProductController extends Controller
     public function saveAdd(ValidatePrd $request)
     {
         if ($request->hasFile('up_image')) {
-            $path = $request->file('up_image')->storeAs('public/uploads/products',  $request->up_image->getClientOriginalName());
+            $path = $request->file('up_image')->storeAs('uploads/products',  $request->up_image->getClientOriginalName());
             $image = str_replace('public/', '', $path);
         }
         $products = Products::create([
@@ -51,11 +51,6 @@ class ProductController extends Controller
     {
         $productQuery = Products::where('name', 'like', "%" . $request->keyword . "%");
         $products = $productQuery->paginate(3);
-        // if ($request->key!= "") {
-        //     $products = Products::where('name','LIKE', "%".$request->keyword."%")->get();
-        // }else{
-        //     $products=Products::all();
-        // }
         return view('admin.products.list_prd', compact('products'));
     }
     public function delete($id)
@@ -75,11 +70,6 @@ class ProductController extends Controller
         foreach($prd_att as $item){
             $att_value[$item->attribute_id] = $item->values_id;
         }
-
-        /* 
-        so sánh value_id ở bảng prd_att_vale 
-        có trùng  vs id ở bảng att_value hay ko : đã lấy  xong 
-        */
         return view('admin.products.edit_prd', compact('products', 'cate', 'brand', 'attribute','att_value'));
     }
     public function saveEdit($id, Request $request)

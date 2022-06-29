@@ -21,6 +21,11 @@
                     <div class="button">
                         <button type="submit">Đăng nhập</button>
                     </div>
+                    <div>
+                    @if(session('message')!= null)
+                    <p style="color: red;"> {{session('message')}} </p>
+                    @endif
+                </div>
                 </form>
             </div>
             <div class="Social-Network">

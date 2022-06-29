@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class RoleAdmin
 {
     /**
@@ -28,7 +29,7 @@ class RoleAdmin
             }
             else
             {
-                return redirect(route('admin.index'));
+                return redirect(route('admin.index'))->with('message', 'Bạn không thể xoá sản phẩm hoặc tạo tài khoản nếu không phải admin chính');
             }
         }
     }

@@ -29,17 +29,19 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Danh mục</th>
+            <th scope="col">Ảnh</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
-        @foreach($cate as $cate)
+        @foreach($cate as $cates)
         <tr>
             <td>{{$loop->iteration}}</td>
-            <td>{{$cate->name}}</td>
+            <td>{{$cates->name}}</td>
+            <td><img src="/image/{{ $cates->image }}" width="100px"></td>
             <td>
-                <a href="{{route('edit.cate', ['id' => $cate->id])}}" class="btn btn-info">Sửa</a>
-                <a href="{{route('delete.cate', ['id' => $cate->id])}}" class="btn btn-danger" onclick="return confirm('Bạn có muốn xoá sản phẩm không');">Xóa</a>
+                <a href="{{route('edit.cate', ['id' => $cates->id])}}" class="btn btn-info">Sửa</a>
+                <a href="{{route('delete.cate', ['id' => $cates->id])}}" class="btn btn-danger" onclick="return confirm('Bạn có muốn xoá sản phẩm không');">Xóa</a>
             </td>
         </tr>
         @endforeach

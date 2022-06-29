@@ -15,7 +15,7 @@ class BrandingController extends Controller
     public function saveBrand( Request $request)
     {
         if ($request->hasFile('up_image')) {
-            $path = $request->file('up_image')->storeAs('app/public/uploads/products',  $request->up_image->getClientOriginalName());
+            $path = $request->file('up_image')->storeAs('uploads/products',  $request->up_image->getClientOriginalName());
             $image = str_replace('public/', '', $path);
         }
         $brand = Branding::create([
@@ -23,12 +23,20 @@ class BrandingController extends Controller
             'image' => $image,
         ]);
         $brand->save();
-        return redirect(route('create.brand'));
+        return redirect(route('list.brand'));
     }
-    public function list()
+    public function list(Request $req)
     {
-        $brand = Branding::all();
+        $brandQuery = Branding::where('name', "like",'%'.$req->keyword.'%');
+        $brand = $brandQuery->paginate(6);
         return view('admin.brand.list',compact('brand'));
+    }
+
+    public function delete($id)
+    {
+        $brand = Branding::find($id);
+        $brand->delete();
+        return redirect(route('list.brand'));
     }
         
 }

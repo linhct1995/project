@@ -15,6 +15,10 @@
             <option value="{{$cate->id}}">{{$cate->name}}</option>
             @endforeach
         </select>
+        <div class="form-group">
+                <label for="">Ảnh sản phẩm</label>
+                <input type="file" name="up_image" class="form-control">
+            </div>
         <button type="submit" class="btn btn-primary">Lưu</button>
         <a href="" class="btn btn-danger">Hủy</a>
 
