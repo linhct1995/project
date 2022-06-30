@@ -18,11 +18,11 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::match(['get', 'post'], '/Login', [UserController::class, 'saveAdminLogin'])->name('login');
-Route::get('/LogoutAdmin', [UserController::class, 'logoutAdmin'])->name('logout.admin');
-Route::get('/registrationAdmin', [UserController::class, 'registrationAdmin'])->middleware('check-role-admin')->name('admin.register');
-Route::post('/registrationAdmin', [UserController::class, 'saveRegistrationAdmin']);
 Route::middleware('auth:admin')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('admin.index');
+    Route::get('/LogoutAdmin', [UserController::class, 'logoutAdmin'])->name('logout.admin');
+    Route::get('/registrationAdmin', [UserController::class, 'registrationAdmin'])->middleware('check-role-admin')->name('admin.register');
+    Route::post('/registrationAdmin', [UserController::class, 'saveRegistrationAdmin']);
     Route::prefix('product')->group(function () {
         Route::get('create', [ProductController::class, 'create'])->name('create.prd');
         Route::post('create', [ProductController::class, 'saveAdd']);
