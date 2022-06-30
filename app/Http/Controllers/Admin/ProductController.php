@@ -26,9 +26,11 @@ class ProductController extends Controller
     }
     public function saveAdd(ValidatePrd $request)
     {
-        if ($request->hasFile('up_image')) {
-            $path = $request->file('up_image')->storeAs('uploads/products',  $request->up_image->getClientOriginalName());
-            $image = str_replace('public/', '', $path);
+        if ($image = $request->file('up_image')) {
+            $destinationPath = 'image/products/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $image = "$profileImage";
         }
         $products = Products::create([
             'name' => $request->name,
@@ -90,11 +92,12 @@ class ProductController extends Controller
             ]
         );
         $products = Products::find($id);
-        if ($request->hasFile('up_image')) {
-            $path = $request->file('up_image')->storeAs('public/uploads/products',  $request->up_image->getClientOriginalName());
-            $products->image = str_replace('public/', '', $path);
+        if ($image = $request->file('up_image')) {
+            $destinationPath = 'image/products/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $products->image = "$profileImage";
         }
-
         foreach ($request->attribute_values as $key => $values) {
             $attr = Product_ValueAtt::where('id_prd', $products->id)
                 ->where('attribute_id', $key)->first();

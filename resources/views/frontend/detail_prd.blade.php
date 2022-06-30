@@ -8,7 +8,7 @@
     <span>{{$detail->name}}</span>
     <div class="content row">
         <div class="image_product col-6">
-            <img src="{{asset( 'storage/public/' . $detail->image)}}" alt="" width="80%">
+            <img src="/image/products/{{ $detail->image }}" alt="" width="80%">
         </div>
         <div class="information_product col-6">
             <div class="title">Thông số kỹ tduật</div>
@@ -53,7 +53,7 @@
         <div class="related_products_grid row">
             @foreach($ccc as $items)
             <div class="product col-3">
-                <img src="{{asset( 'storage/public/' . $items->image)}}" alt="">
+                <img src="/image/products/{{ $items->image }}" alt="">
                 <div class="name-product"><a href="">{{$items->name}}</a></div>
                 <div class="product-price">{{number_format($items->price)}} ₫</div>
                 <span class="product-status">

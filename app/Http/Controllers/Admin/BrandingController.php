@@ -14,9 +14,11 @@ class BrandingController extends Controller
     }
     public function saveBrand( Request $request)
     {
-        if ($request->hasFile('up_image')) {
-            $path = $request->file('up_image')->storeAs('uploads/products',  $request->up_image->getClientOriginalName());
-            $image = str_replace('public/', '', $path);
+        if ($image = $request->file('up_image')) {
+            $destinationPath = 'image/brands/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $image = "$profileImage";
         }
         $brand = Branding::create([
             'name' => $request->name,
@@ -38,5 +40,32 @@ class BrandingController extends Controller
         $brand->delete();
         return redirect(route('list.brand'));
     }
-        
+    public function edit($id)
+    {
+
+        $brand = Branding::find($id);
+        return view('admin.brand.edit_brand', compact('brand'));
+    }
+    public function saveEdit(Request $request, $id)
+    {
+        $request->validate(
+            [
+                'name' => 'required|max:50',
+            ],
+            [
+                'name.required' => 'Hãy nhập tên sản phẩm',
+                'name.max' => 'Tên sản tối đa 50 ký tự',
+            ]
+        );
+        $brand = Branding::find($id);
+        if ($image = $request->file('up_image')) {
+            $destinationPath = 'image/brands/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $brand->image = "$profileImage";
+        }
+        $brand->fill($request->all());
+        $brand->save();
+        return redirect(route('list.brand'));
+    }
 }

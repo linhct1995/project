@@ -30,18 +30,6 @@
         color: red;
     }
 </style>
-<!-- <form action="" method="get">
-    <label for="">Tìm kiếm</label>
-    <input type="text" name="keyword" placeholder="tìm tên sản phẩm">
-    <label for="">giá</label>
-    <select name="keyprice" id="">
-        <option value=""></option>
-        <option value="10" >1-10</option>
-        <option value="20" >11-20</option>
-        <option value="30" >21-30</option>
-    </select>
-    <button type="submit">Tìm</button>
-</form> -->
 <div class="name_customer">Khách hàng : <span>{{$cart->name}}</span></div>
 <table class="table">
     <thead>
@@ -57,10 +45,10 @@
         @foreach($order_detail as $item)
         <tr>
             <td>{{$item->name_prd}}</td>
-            <td><img src="{{asset( 'storage/' . $item->image)}}" width="100" /></td>
-            <td>{{$item->price}}</td>
+            <td><img src="/image/products/{{ $item->image }}" width="100" /></td>
+            <td>{{number_format($item->price)}}</td>
             <td>{{$item->quantity}}</td>
-            <td>{{$item->totalPrice}}</td>
+            <td>{{number_format($item->totalPrice)}}</td>
         </tr>
         @endforeach
     </tbody>

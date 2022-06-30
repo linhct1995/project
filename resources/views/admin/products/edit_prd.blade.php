@@ -14,7 +14,7 @@
         </div>
         <div class="col-6">
             <div class="add-product-preview-img">
-                <img src="{{asset('storage/' . $products->image)}}" class="img-thumbnail" width="100">
+                <img src="/image/products/{{ $products->image }}" class="img-thumbnail" width="100">
             </div>
             <div class="form-group">
                 <label for="">Ảnh sản phẩm</label>

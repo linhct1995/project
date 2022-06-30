@@ -21,7 +21,7 @@
     <div class="grid-product row">
         @foreach($product as $item)
         <div class="product col-3">
-            <img src="{{asset( 'storage/' . $item->image)}}" alt="">
+            <img src="/image/products/{{ $item->image }}" alt="">
             <div class="name-product"><a href="{{route('detail.prd',['id'=>$item->id])}}">{{$item->name}}</a></div>
             <div class="product-price">{{number_format($item->price)}}</div>
             <span class="product-status">Tình trạng :

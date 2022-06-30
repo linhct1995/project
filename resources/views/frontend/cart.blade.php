@@ -28,7 +28,7 @@
 @foreach(Session::get("Cart")->products as $item)
 <div class="header-cart-item" id="chang-item-cart">
     <div class="header-cart-image">
-        <img src="{{asset( 'storage/' . $item['productInfo']->image)}}" alt="">
+        <img src="/image/products/{{ $item['productInfo']->image }}" alt="">
     </div>
     <div class="header-cart-info">
         <div class="header-cart-item-name" style="font-size: 15px;">{{$item['productInfo']->name}}</div>

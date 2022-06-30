@@ -15,7 +15,7 @@
             @if(Session::has("Cart") != null)
             @foreach(Session::get("Cart")->products as $item)
             <tr>
-                <td class="cart-pic first-row"><img src="{{asset( 'storage/' . $item['productInfo']->image)}}" alt="" height="70%" width="90%"></td>
+                <td class="cart-pic first-row"><img src="/image/products/{{ $item['productInfo']->image }}" alt="" height="70%" width="90%"></td>
                 <td class="cart-title first-row">
                     <h5>{{$item['productInfo']->name}}</h5>
                 </td>
@@ -42,7 +42,7 @@
             @if(Session::has("Cart") != null)
             <ul>
                 <li class="subtotal">TotalQuanty <span>{{Session::get("Cart")->totalQuanty}}</span></li>
-                <li class="cart-total">TotalPrice <span>$ {{Session::get("Cart")->totaPrice}}</span></li>
+                <li class="cart-total">TotalPrice <span>{{number_format(Session::get("Cart")->totaPrice)}}</span></li>
             </ul>
             <a href="{{route('checkout')}}" class="proceed-btn">PROCEED TO CHECK OUT</a>
             @endif

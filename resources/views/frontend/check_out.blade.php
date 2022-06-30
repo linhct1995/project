@@ -49,7 +49,7 @@
                     @if(Session::has("Cart") != null && !session()->get('cartNew'))
                     @foreach(Session::get("Cart")->products as $item)
                     <tr>
-                        <td class="cart-pic first-row"><img src="{{asset( 'storage/' . $item['productInfo']->image)}}" alt="" height="70%" width="90%"></td>
+                        <td class="cart-pic first-row"><img src="/image/products/{{ $item['productInfo']->image }}" alt="" height="70%" width="90%"></td>
                         <td class="cart-title first-row">
                             <h5>{{$item['productInfo']->name}}</h5>
                         </td>
@@ -68,7 +68,7 @@
                     @if(session()->get('cartNew') && count(session()->get('cartNew')) > 0)
                     @foreach(session()->get('cartNew') as $item)
                     <tr>
-                        <td class="cart-pic first-row"><img src="{{asset( 'storage/' . $item['productInfo']->image)}}" alt="" height="70%" width="90%">
+                        <td class="cart-pic first-row"><img src="/image/products/{{ $item['productInfo']->image }}" alt="" height="70%" width="90%">
                             <div>
                                 @if(isset($item['message']))
                                 {{$item['message']}}
@@ -99,9 +99,9 @@
                     @if(Session::has("Cart") != null)
                     <ul>
                         <li class="subtotal">TotalQuanty <span>{{Session::get("Cart")->totalQuanty}}</span></li>
-                        <li class="cart-total">TotalPrice <span>$ {{Session::get("Cart")->totaPrice}}</span></li>
+                        <li class="cart-total">TotalPrice <span>{{number_format(Session::get("Cart")->totaPrice)}}</span></li>
                     </ul>
-                    <button>Thanh toáne</button>
+                    <button>Thanh toán</button>
                     @endif
                 </div>
             </div>

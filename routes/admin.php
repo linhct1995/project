@@ -16,8 +16,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/Login', [UserController::class, 'loginAdmin'])->name('login.admin');
-// Route::post('/Login', [UserController::class, 'saveAdminLogin']);
+
 Route::match(['get', 'post'], '/Login', [UserController::class, 'saveAdminLogin'])->name('login');
 Route::get('/LogoutAdmin', [UserController::class, 'logoutAdmin'])->name('logout.admin');
 Route::get('/registrationAdmin', [UserController::class, 'registrationAdmin'])->middleware('check-role-admin')->name('admin.register');
@@ -61,8 +60,8 @@ Route::middleware('auth:admin')->group(function () {
         Route::post('create', [BrandingController::class, 'saveBrand']);
         Route::get('list', [BrandingController::class, 'list'])->name('list.brand');
         Route::get('delete/{id}', [BrandingController::class, 'delete'])->middleware('check-role-admin')->name('delete.brand');
-        // Route::get('edit/{id}', [CateController::class, 'edit'])->name('edit.cate');
-        // Route::post('edit/{id}', [CateController::class, 'saveEdit']);
+        Route::get('edit/{id}', [BrandingController::class, 'edit'])->name('edit.brand');
+        Route::post('edit/{id}', [BrandingController::class, 'saveEdit']);
     });
     Route::prefix('cart')->group(function () {
         Route::get('list', [AdminCartController::class, 'list'])->name('admin.list.cart');

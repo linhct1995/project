@@ -22,18 +22,6 @@
         width: 150px;
     }
 </style>
-<!-- <form action="" method="get">
-    <label for="">Tìm kiếm</label>
-    <input type="text" name="keyword" placeholder="tìm tên sản phẩm">
-    <label for="">giá</label>
-    <select name="keyprice" id="">
-        <option value=""></option>
-        <option value="10" >1-10</option>
-        <option value="20" >11-20</option>
-        <option value="30" >21-30</option>
-    </select>
-    <button type="submit">Tìm</button>
-</form> -->
 <table class="table">
     <thead>
         <tr>
@@ -52,7 +40,7 @@
             <td>{{$item->phone}}</td>
             <td>{{$item->address}}</td>
             <td>{{$item->totalProduct}}</td>
-            <td>{{$item->totalPrice}}</td>
+            <td>{{number_format($item->totalPrice)}}</td>
             <td><a href="{{route('admin.order_detail',['id' => $item->id])}}">Hoá đơn chi tiết</a></td>
         </tr>
         @endforeach

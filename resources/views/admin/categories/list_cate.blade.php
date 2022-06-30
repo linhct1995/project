@@ -29,7 +29,6 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Danh mục</th>
-            <th scope="col">Ảnh</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -38,7 +37,6 @@
         <tr>
             <td>{{$loop->iteration}}</td>
             <td>{{$cates->name}}</td>
-            <td><img src="/image/{{ $cates->image }}" width="100px"></td>
             <td>
                 <a href="{{route('edit.cate', ['id' => $cates->id])}}" class="btn btn-info">Sửa</a>
                 <a href="{{route('delete.cate', ['id' => $cates->id])}}" class="btn btn-danger" onclick="return confirm('Bạn có muốn xoá sản phẩm không');">Xóa</a>

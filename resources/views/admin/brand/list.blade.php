@@ -38,9 +38,9 @@
         <tr>
             <td>{{$loop->iteration}}</td>
             <td>{{$brands->name}}</td>
-            <td><img src="{{asset( 'storage/' . $brands->image)}}" width="100" /></div></td>
+            <td><img src="/image/brands/{{ $brands->image }}" width="100" /></div></td>
             <td>
-                <a  class="btn btn-info">Sửa</a>
+                <a href="{{route('edit.brand', ['id' => $brands->id])}}" class="btn btn-info">Sửa</a>
                 <a href="{{route('delete.brand', ['id' => $brands->id])}}"  class="btn btn-danger" onclick="return confirm('Bạn có muốn xoá sản phẩm không');">Xóa</a>
             </td>
         </tr>

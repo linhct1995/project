@@ -29,25 +29,17 @@ class CateController extends Controller
                 'name.max' => 'Tên sản tối đa 50 ký tự',
             ]
         );
-        if ($image = $request->file('up_image')) {
-            $destinationPath = 'image/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $image = "$profileImage";
-        }
         if (isset(Cate::find($request->parent)->parent) == null ) {
             $cate = Cate::create([
                 'name' => $request->name,
-                'parent' => 0,
-                'image' => $image
+                'parent' => 0
             ]);
             $cate->save();        
         }else{
             $parent = Cate::find($request->parent)->id;
             $cate = Cate::create([
                 'name' => $request->name,
-                'parent' => $parent,
-                'image' => $image
+                'parent' => $parent
             ]);
             $cate->save();
         }

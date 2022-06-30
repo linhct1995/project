@@ -42,7 +42,7 @@
                                 @foreach(Session::get("Cart")->products as $item)
                                 <tr>
                                     <td class="cart-pic first-row">
-                                        <img src="{{asset( 'storage/' . $item['productInfo']->image)}}" alt="" height="70%" width="90%">
+                                        <img src="/image/products/{{ $item['productInfo']->image }}" alt="" height="70%" width="90%">
 
                                     </td>
                                     <td class="cart-title first-row">
