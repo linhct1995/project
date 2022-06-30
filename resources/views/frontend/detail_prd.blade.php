@@ -65,7 +65,7 @@
                     <?php }
                     ?>
                 </span>
-                <span class="cart"><button>Mua hàng</button></span>
+                <span class="cart" onclick="AddCart({{$items->id}})"><button>Mua hàng</button></span>
             </div>
             @endforeach
         </div>

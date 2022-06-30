@@ -8,7 +8,7 @@
     <div class="image-wrap row">
         @foreach($brand as $brands)
         <div class="collection-item col-4">
-            <div class="collection-item-image"><img src="{{asset( 'storage/' . $brands->image)}}" alt=""></div>
+            <div class="collection-item-image"><img src="/image/brands/{{ $brands->image }}" alt=""></div>
             <div class="collection-item-name">{{$brands->name}}</div>
         </div>
         @endforeach
