@@ -18,9 +18,12 @@ class CreateProductAttributeValues extends Migration
             $table->unsignedBigInteger('id_prd'); 
             $table->unsignedBigInteger('attribute_id');
             $table->unsignedBigInteger('values_id') ;
-            $table->foreign('id_prd')->references('id')->on('products')->onUpdate('cascade');
+            $table->foreign('id_prd')->references('id')->on('products');
             $table->foreign('attribute_id')->references('id')->on('attribute') ;
             $table->foreign('values_id')->references('id')->on('attribute_values') ;
+            $table->dropForeign('product_attribute_values_id_prd_foreign');
+            $table->dropForeign('product_attribute_values_attribute_id_foreign');
+            $table->dropForeign('product_attribute_values_values_id_foreign');
             $table->timestamps();
         });
     }

@@ -58,6 +58,7 @@ class ProductController extends Controller
     public function delete($id)
     {
         $products = Products::find($id);
+        $products->Attribute()->detach();
         $products->delete();
         return redirect(route('list.prd'));
     }
