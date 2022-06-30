@@ -115,7 +115,7 @@ class ProductController extends Controller
         $getProductSame = Products::all();
         $ccc = $this->getProductSame($id);
         $getAttriValue =  $this->atribueteValue($id);
-        $comment = Comment::select('content', 'customer_name')->where('id_prd', $id)->get();
+        $comment = Comment::select('content', 'customer_name','status')->where('id_prd', $id)->get();
         /*
         lấy dữ liệu product theo cate_id
         */

@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <hr>
-    <a href="" class="home_page">Trang chủ</a>/
+    <a href="{{route('front.index')}}" class="home_page">Trang chủ</a>/
     <span>{{$detail->name}}</span>
     <div class="content row">
         <div class="image_product col-6">
@@ -17,7 +17,7 @@
                 <tbody>
                     <tr>
                         <td style="font-weight: bold;">Thương hiệu</td>
-                        <td>{{$detail->name}}</td>
+                        <td>{{$detail->brand->name}}</td>
                     </tr>
                     @foreach($getAttriValue as $key => $items)
                     <tr>
@@ -42,9 +42,11 @@
     </form>
     <div class="show_comment">
         <div class="title_comment">Bình luận của khách hàng</div>
-        @foreach($comment as $key => $item)  
+        @foreach($comment as $key => $item)
+        @if($item->status == 2)      
         <div class="customer_name">Khách hàng : {{$item -> customer_name}}</div>
         <div class="content_comment"> Nội dung :{{$item -> content}} </div>
+        @endif
         @endforeach
     </div>
     <hr>
