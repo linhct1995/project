@@ -107,6 +107,7 @@ class ProductController extends Controller
             ]);
             $attr->save();
         }
+        $products->fill($request->all());
         $products->save();
         return redirect(route('list.prd'));
     }
